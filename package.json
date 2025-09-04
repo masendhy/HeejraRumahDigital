@@ -3,20 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "db:generate": "npx prisma generate",
     "db:migrate": "npx prisma migrate dev",
-    "db:studio": "npx prisma studio"
+    "db:studio": "npx prisma studio",
+    "upload:images": "npx tsx scripts/uploadImages.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
+    "cloudinary": "^1.41.3",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "next": "15.5.2",
     "prisma": "^6.15.0",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "tsx": "^4.20.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

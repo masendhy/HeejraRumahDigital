@@ -30,11 +30,11 @@ body {
 }
 
 .dotted-background {
-  background-image: radial-gradient(circle, var(--dot-color) var(--dot-size), transparent var(--dot-size));
+  background-image: radial-gradient(var(--dot-color) var(--dot-size), transparent var(--dot-size));
   background-size: var(--dot-space) var(--dot-space);
 }
 
 /* Additional styles for our landing page */
 .hero-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #4ade80 0%, #8b5cf6 50%, #3b82f6 100%);
 }
