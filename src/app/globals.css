@@ -1,32 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --dot-color: #e5e7eb;
-  --dot-size: 1px;
-  --dot-space: 20px;
+  --background-light: #eafa37;
+  --foreground-light: #171717;
+  --dot-color-light: #e5e7eb;
+  --dot-size: 2px;
+  --dot-space: 60px;
+
+  --gradient-start-light: #3C400B; /* Dark green */
+  --gradient-end-light: #9E2A83; /* Purple */
+
+  --background-dark: #eafa37;
+  --foreground-dark: #171717;
+  --dot-color-dark: #3f3f46;
+
+  --gradient-start-dark: #2a2d09; /* Darker green */
+  --gradient-end-dark: #6d195b; /* Darker purple */
+  
+  --cursor-x: 0px;
+  --cursor-y: 0px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Default to light mode */
+:root {
+  --background: var(--background-light);
+  --foreground: var(--foreground-light);
+  --dot-color: var(--dot-color-light);
+  --gradient-start: var(--gradient-start-light);
+  --gradient-end: var(--gradient-end-light);
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --dot-color: #3f3f46;
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
+    --dot-color: var(--dot-color-dark);
+    --gradient-start: var(--gradient-start-dark);
+    --gradient-end: var(--gradient-end-dark);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Jost", sans-serif;
+}
+
+/* Hide default cursor when custom cursor is active */
+body.hide-default-cursor {
+  cursor: none;
+}
+
+/* Custom cursor styles */
+body.hide-default-cursor::before {
+  content: "";
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #8b5cf6;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
 }
 
 .dotted-background {
@@ -35,6 +74,32 @@ body {
 }
 
 /* Additional styles for our landing page */
-.hero-gradient {
-  background: linear-gradient(135deg, #4ade80 0%, #8b5cf6 50%, #3b82f6 100%);
+
+/* GSAP Animation Classes */
+.animate-fade-in {
+  opacity: 0;
+}
+
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.animate-scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* Animation for interactive elements */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
 }

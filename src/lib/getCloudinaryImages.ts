@@ -10,7 +10,7 @@ export async function getCloudinaryImages() {
       prefix: 'heejra/',
     });
 
-    return result.resources.map((resource: any) => ({
+    return result.resources.map((resource: {public_id: string, secure_url: string, width: number, height: number}) => ({
       public_id: resource.public_id,
       url: resource.secure_url,
       width: resource.width,

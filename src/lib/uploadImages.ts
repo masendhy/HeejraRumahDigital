@@ -47,8 +47,8 @@ export async function uploadAllPublicImages() {
         
         uploadResults.push({
           fileName: file,
-          url: (result as any).secure_url,
-          public_id: (result as any).public_id,
+          url: (result as {secure_url: string}).secure_url,
+          public_id: (result as {public_id: string}).public_id,
         });
         
         console.log(`Uploaded ${file} successfully`);
