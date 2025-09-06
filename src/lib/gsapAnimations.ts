@@ -44,12 +44,14 @@ export const animateServicesSection = () => {
   
   gsap.fromTo(
     ".service-item",
-    { opacity: 0, y: 50 },
+    { opacity: 0, y: 50, scale: 0.9 },
     { 
       opacity: 1, 
       y: 0, 
+      scale: 1,
       duration: 0.8, 
       stagger: 0.2,
+      ease: "back.out(1.7)",
       scrollTrigger: {
         trigger: ".service-item",
         start: "top 80%"
@@ -97,4 +99,42 @@ export const initScrollAnimations = () => {
     // Refresh ScrollTrigger on route changes or DOM updates
     ScrollTrigger.refresh();
   }
+};
+
+// Fungsi untuk animasi hover card layanan
+export const animateServiceCardHover = (element: HTMLElement) => {
+  if (typeof window !== 'undefined') {
+    // Animasi saat mouse masuk
+    const onMouseEnter = () => {
+      gsap.to(element, {
+        y: -15,
+        scale: 1.02,
+        boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    };
+
+    // Animasi saat mouse keluar
+    const onMouseLeave = () => {
+      gsap.to(element, {
+        y: 0,
+        scale: 1,
+        boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+        duration: 0.4,
+        ease: "power2.out"
+      });
+    };
+
+    // Tambahkan event listeners
+    element.addEventListener('mouseenter', onMouseEnter);
+    element.addEventListener('mouseleave', onMouseLeave);
+
+    // Return fungsi untuk menghapus event listeners
+    return () => {
+      element.removeEventListener('mouseenter', onMouseEnter);
+      element.removeEventListener('mouseleave', onMouseLeave);
+    };
+  }
+  return () => {};
 };
