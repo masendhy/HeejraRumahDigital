@@ -1,12 +1,11 @@
 # TechCraft Solutions - IT Startup Landing Page
 
-A modern landing page for an IT startup specializing in web and mobile application development using Next.js, MySQL with Prisma ORM, and Docker.
+A modern landing page for an IT startup specializing in web and mobile application development using Next.js and MySQL with Prisma ORM.
 
 ## Technologies Used
 
 - **Frontend**: Next.js 14 (App Router), TypeScript, Tailwind CSS
 - **Database**: MySQL with Prisma ORM
-- **Deployment**: Docker & Docker Compose
 - **Styling**: Tailwind CSS with custom dotted background pattern
 
 ## Features
@@ -24,7 +23,6 @@ A modern landing page for an IT startup specializing in web and mobile applicati
 ### Prerequisites
 
 - Node.js (v18 or higher)
-- Docker & Docker Compose
 - npm or yarn
 
 ### Development Setup
@@ -47,17 +45,6 @@ A modern landing page for an IT startup specializing in web and mobile applicati
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Docker Setup
-
-1. Build and start services with Docker Compose:
-   ```bash
-   docker-compose up --build
-   ```
-
-2. Access the application at [http://localhost:3000](http://localhost:3000)
-
-3. Access Adminer (database management) at [http://localhost:8080](http://localhost:8080)
-
 ### Database Management
 
 - Generate Prisma client: `npm run db:generate`
@@ -75,8 +62,6 @@ A modern landing page for an IT startup specializing in web and mobile applicati
 ├── prisma/
 │   └── schema.prisma     # Prisma schema
 ├── public/               # Static assets
-├── Dockerfile            # Docker configuration
-├── docker-compose.yml    # Docker Compose configuration
 └── README.md             # This file
 ```
 
@@ -91,4 +76,4 @@ To customize the landing page:
 
 ## Deployment
 
-The application can be deployed using Docker containers. Build the Docker image and run it with the appropriate environment variables.
+The application can be deployed to any Node.js hosting platform. Make sure to set the appropriate environment variables for database connection.

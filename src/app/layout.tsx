@@ -20,7 +20,7 @@ const jost = Jost({
 
 export const metadata: Metadata = {
   title: "TechCraft Solutions | Pengembangan Web & App Kustom",
-  description: "Kami membangun website dan aplikasi kustom untuk bisnis dari berbagai ukuran menggunakan teknologi terkini seperti Next.js, MySQL, dan Docker.",
+  description: "Kami membangun website dan aplikasi kustom untuk bisnis dari berbagai ukuran menggunakan teknologi terkini seperti Next.js dan MySQL.",
 };
 
 export default function RootLayout({
@@ -31,20 +31,8 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${jost.className} antialiased dotted-background min-h-screen hide-default-cursor`}
-        style={{}}
+        className={`${geistSans.variable} ${geistMono.variable} ${jost.className} antialiased dotted-background min-h-screen`}
       >
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.addEventListener('mousemove', function(e) {
-                const cursor = document.body;
-                cursor.style.setProperty('--cursor-x', e.clientX + 'px');
-                cursor.style.setProperty('--cursor-y', e.clientY + 'px');
-              });
-            `,
-          }}
-        />
         {children}
       </body>
     </html>

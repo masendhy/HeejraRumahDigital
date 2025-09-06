@@ -43,7 +43,7 @@ export const animateServicesSection = () => {
   );
   
   gsap.fromTo(
-    ".service-card",
+    ".service-item",
     { opacity: 0, y: 50 },
     { 
       opacity: 1, 
@@ -51,7 +51,7 @@ export const animateServicesSection = () => {
       duration: 0.8, 
       stagger: 0.2,
       scrollTrigger: {
-        trigger: ".service-card",
+        trigger: ".service-item",
         start: "top 80%"
       }
     }

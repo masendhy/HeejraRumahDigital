@@ -16,9 +16,6 @@
 
   --gradient-start-dark: #2a2d09; /* Darker green */
   --gradient-end-dark: #6d195b; /* Darker purple */
-  
-  --cursor-x: 0px;
-  --cursor-y: 0px;
 }
 
 /* Default to light mode */
@@ -45,27 +42,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Jost", sans-serif;
-}
-
-/* Hide default cursor when custom cursor is active */
-body.hide-default-cursor {
   cursor: none;
-}
-
-/* Custom cursor styles */
-body.hide-default-cursor::before {
-  content: "";
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background-color: #8b5cf6;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  left: var(--cursor-x);
-  top: var(--cursor-y);
-  transform: translate(-50%, -50%);
-  transition: transform 0.1s ease;
 }
 
 .dotted-background {

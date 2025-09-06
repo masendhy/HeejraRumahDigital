@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { 
   animateHeroSection, 
   animateServicesSection, 
@@ -12,6 +12,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   // Initialize animations when component mounts
   useEffect(() => {
@@ -26,6 +27,25 @@ export default function Home() {
     // Initialize scroll animations
     initScrollAnimations();
     
+    // Setup custom cursor
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!isMobile) {
+      const onMouseMove = (e: MouseEvent) => {
+        if (cursorRef.current) {
+          // Posisi kursor langsung sesuai dengan koordinat mouse
+          cursorRef.current.style.left = `${e.clientX}px`;
+          cursorRef.current.style.top = `${e.clientY}px`;
+        }
+      };
+      
+      // Gunakan passive event listener untuk performa yang lebih baik
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      
+      return () => {
+        window.removeEventListener('mousemove', onMouseMove);
+      };
+    }
+    
     // Refresh ScrollTrigger when component unmounts
     return () => {
       if (typeof window !== 'undefined') {
@@ -37,22 +57,22 @@ export default function Home() {
   const services = [
     {
       title: "Pengembangan Web",
-      description: "Website kustom yang dibangun dengan teknologi modern untuk kinerja optimal dan pengalaman pengguna yang luar biasa.",
+      description: "Website dan aplikasi web responsif yang dibangun dengan Next.js dan teknologi modern.",
       icon: "🌐",
     },
     {
-      title: "Aplikasi Mobile",
-      description: "Aplikasi mobile native dan cross-platform yang dirancang untuk menarik audiens Anda di perangkat apa pun.",
+      title: "Pengembangan Mobile",
+      description: "Aplikasi mobile yang dioptimalkan untuk iOS dan Android menggunakan React Native.",
       icon: "📱",
     },
     {
-      title: "Solusi Database",
-      description: "Arsitektur database yang skalabel menggunakan MySQL dengan Prisma ORM untuk manajemen data yang efisien.",
+      title: "Desain Database",
+      description: "Arsitektur database yang efisien dan skalabel menggunakan MySQL dan Prisma ORM.",
       icon: "🗄️",
     },
     {
       title: "DevOps & Deployment",
-      description: "Solusi yang dikontainerisasi dengan Docker untuk deployment dan penskalaan yang mulus.",
+      description: "Solusi deployment dan penskalaan yang mulus untuk aplikasi Anda.",
       icon: "🐳",
     },
   ];
@@ -61,7 +81,7 @@ export default function Home() {
     {
       name: "Budi Santoso",
       role: "CEO, TechStart Indonesia",
-      content: "Tim ini menyelesaikan proyek kami tepat waktu dan melampaui ekspektasi kami. Keahlian mereka dalam Next.js dan Docker sangat mengesankan.",
+      content: "Tim ini menyelesaikan proyek kami tepat waktu dan melampaui ekspektasi kami. Keahlian mereka dalam Next.js sangat mengesankan.",
     },
     {
       name: "Siti Rahayu",
@@ -78,8 +98,19 @@ export default function Home() {
   // Split the hero title into words for animation
   const heroTitleWords = ["Solusi", "Web", "&", "App", "Kustom", "untuk", "Bisnis", "Modern"];
 
+  // Deteksi perangkat mobile
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
   return (
     <div className="min-h-screen">
+      {/* Custom Cursor - hanya ditampilkan di desktop */}
+      {!isMobile && (
+        <div
+          ref={cursorRef}
+          className="fixed w-4 h-4 rounded-full bg-violet-500 pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2"
+        />
+      )}
+
       {/* Hero Section */}
       <section className="py-20 px-6 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto">
@@ -94,10 +125,10 @@ export default function Home() {
             Kami membangun aplikasi dan website yang skalabel menggunakan teknologi terkini.
           </p>
           <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium">
+            <button className="bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium hover-target">
               Mulai Proyek Anda
             </button>
-            <button className="border-2 border-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors text-lg font-medium">
+            <button className="border-2 border-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors text-lg font-medium hover-target">
               Lihat Karya Kami
             </button>
           </div>
@@ -107,7 +138,9 @@ export default function Home() {
       {/* Services Section */}
       <section id="services" className="py-20 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="services-title text-3xl md:text-4xl font-bold mb-4">Layanan Kami</h2>
+          <h2 className="services-title text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+            Layanan Kami
+          </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Kami menyediakan solusi pengembangan end-to-end yang disesuaikan dengan kebutuhan bisnis Anda
           </p>
@@ -117,7 +150,7 @@ export default function Home() {
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="service-item flex flex-row items-start p-8 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+              className="service-item flex flex-row items-start p-8 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group hover-target"
             >
               <div className="text-4xl mr-6 mt-1 flex-shrink-0 w-16 h-16 flex items-center justify-center rounded-xl bg-gray-50 group-hover:bg-gray-100 transition-colors duration-300">
                 {service.icon}
@@ -142,23 +175,19 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item">
+            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item hover-target">
               <div className="text-4xl mb-4">⚡</div>
               <span className="font-medium">Next.js</span>
             </div>
-            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item">
+            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item hover-target">
               <div className="text-4xl mb-4">🐬</div>
               <span className="font-medium">MySQL</span>
             </div>
-            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item">
+            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item hover-target">
               <div className="text-4xl mb-4">🔗</div>
               <span className="font-medium">Prisma ORM</span>
             </div>
-            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item">
-              <div className="text-4xl mb-4">🐳</div>
-              <span className="font-medium">Docker</span>
-            </div>
-            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item">
+            <div className="flex flex-col items-center justify-center p-6 bg-white rounded-xl shadow tech-stack-item hover-target">
               <div className="text-4xl mb-4">☁️</div>
               <span className="font-medium">Cloud</span>
             </div>
@@ -177,7 +206,7 @@ export default function Home() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="testimonial-card bg-white p-8 rounded-xl shadow-lg border border-gray-100">
+            <div key={index} className="testimonial-card bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover-target">
               <div className="text-yellow-400 text-2xl mb-4">★★★★★</div>
               <p className="text-gray-600 mb-6 italic">&quot;{testimonial.content}&quot;</p>
               <div>
@@ -197,10 +226,10 @@ export default function Home() {
             Mari kita diskusikan bagaimana kami dapat membantu mewujudkan visi Anda dengan layanan pengembangan ahli kami.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 transition-colors text-lg font-medium">
+            <button className="bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 transition-colors text-lg font-medium hover-target">
               Hubungi Kami
             </button>
-            <button className="border-2 border-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium">
+            <button className="border-2 border-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium hover-target">
               Jadwalkan Panggilan
             </button>
           </div>
@@ -213,7 +242,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 rounded-lg hero-gradient"></div>
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-green-800 to-purple-700"></div>
                 <span className="text-xl font-bold">TechCraft</span>
               </div>
               <p className="text-gray-600">
@@ -224,30 +253,30 @@ export default function Home() {
             <div>
               <h3 className="font-bold text-lg mb-4">Layanan</h3>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-gray-900">Pengembangan Web</a></li>
-                <li><a href="#" className="hover:text-gray-900">Pengembangan Aplikasi</a></li>
-                <li><a href="#" className="hover:text-gray-900">Desain Database</a></li>
-                <li><a href="#" className="hover:text-gray-900">DevOps</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Pengembangan Web</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Pengembangan Aplikasi</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Desain Database</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">DevOps</a></li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-bold text-lg mb-4">Perusahaan</h3>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-gray-900">Tentang Kami</a></li>
-                <li><a href="#" className="hover:text-gray-900">Portofolio</a></li>
-                <li><a href="#" className="hover:text-gray-900">Karir</a></li>
-                <li><a href="#" className="hover:text-gray-900">Kontak</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Tentang Kami</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Portofolio</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Karir</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Kontak</a></li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-bold text-lg mb-4">Terhubung</h3>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-gray-900">Twitter</a></li>
-                <li><a href="#" className="hover:text-gray-900">LinkedIn</a></li>
-                <li><a href="#" className="hover:text-gray-900">GitHub</a></li>
-                <li><a href="#" className="hover:text-gray-900">Instagram</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Twitter</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">LinkedIn</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">GitHub</a></li>
+                <li><a href="#" className="hover:text-gray-900 hover-target">Instagram</a></li>
               </ul>
             </div>
           </div>
