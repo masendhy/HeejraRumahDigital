@@ -9,6 +9,8 @@ import {
   animateServiceCardHover
 } from "@/lib/gsapAnimations";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import DemoWebsiteSection from "@/components/DemoWebsiteSection";
 
 // Icon Components
 const WebDevelopmentIcon = () => (
@@ -337,6 +339,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Why Choose Us */}
+      <WhyChooseUs />
+
+      {/* Demo Website Section */}
+      <DemoWebsiteSection />
 
       {/* Testimonials */}
       <section id="testimonials" className="py-20 px-6 max-w-7xl mx-auto">
