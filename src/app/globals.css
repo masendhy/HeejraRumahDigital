@@ -4,8 +4,8 @@
   --background-light: #eafa37;
   --foreground-light: #171717;
   --dot-color-light: #a0a0a0;
-  --dot-size: 3px;
-  --dot-space: 40px;
+  --dot-size: 4px;
+  --dot-space: 150px;
 
   --gradient-start-light: #3C400B; /* Dark green */
   --gradient-end-light: #9E2A83; /* Purple */
