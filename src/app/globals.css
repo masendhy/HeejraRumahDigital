@@ -3,16 +3,16 @@
 :root {
   --background-light: #eafa37;
   --foreground-light: #171717;
-  --dot-color-light: #e5e7eb;
-  --dot-size: 2px;
-  --dot-space: 60px;
+  --dot-color-light: #a0a0a0;
+  --dot-size: 3px;
+  --dot-space: 40px;
 
   --gradient-start-light: #3C400B; /* Dark green */
   --gradient-end-light: #9E2A83; /* Purple */
 
-  --background-dark: #eafa37;
-  --foreground-dark: #171717;
-  --dot-color-dark: #3f3f46;
+  --background-dark: #101829;
+  --foreground-dark: #eafa37;
+  --dot-color-dark: #606060;
 
   --gradient-start-dark: #2a2d09; /* Darker green */
   --gradient-end-dark: #6d195b; /* Darker purple */
@@ -28,14 +28,12 @@
 }
 
 /* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--background-dark);
-    --foreground: var(--foreground-dark);
-    --dot-color: var(--dot-color-dark);
-    --gradient-start: var(--gradient-start-dark);
-    --gradient-end: var(--gradient-end-dark);
-  }
+.dark {
+  --background: var(--background-dark);
+  --foreground: var(--foreground-dark);
+  --dot-color: var(--dot-color-dark);
+  --gradient-start: var(--gradient-start-dark);
+  --gradient-end: var(--gradient-end-dark);
 }
 
 body {
@@ -46,8 +44,9 @@ body {
 }
 
 .dotted-background {
-  background-image: radial-gradient(var(--dot-color) var(--dot-size), transparent var(--dot-size));
+  background-image: radial-gradient(circle, var(--dot-color) var(--dot-size), transparent var(--dot-size));
   background-size: var(--dot-space) var(--dot-space);
+  background-position: 0 0;
 }
 
 /* Additional styles for our landing page */

@@ -5,14 +5,14 @@ const DemoWebsiteSection = () => {
   const demoData = [
     {
       id: 1,
-      image: '/showroom-new.jpg',
-      category: 'E-Commerce',
-      title: 'Demo Toko Online Modern',
+      image: '/showroom-display.jpg',
+      category: 'Branding,Website,App',
+      title: 'Demo Website Showroom',
     },
     {
       id: 2,
-      image: '/showroom-new.jpg',
-      category: 'Landing Page',
+      image: '/travel.jpg',
+      category: 'App,Marketing',
       title: 'Demo Startup Landing Page',
     },
     {
@@ -56,18 +56,20 @@ const DemoWebsiteSection = () => {
                 alt={demo.title} 
                 className="w-full h-64 object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <div className="text-sm font-medium text-purple-300 dark:text-purple-300 mb-2">
+            </div>
+            <div className="bg-[#101829] dark:bg-[#101829] p-6">
+              <div className="flex items-center mb-3">
+                <div className="h-0.5 w-20 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
+                <div className="text-[24px] font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent ml-3">
                   {demo.category}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4">
-                  {demo.title}
-                </h3>
-                <button className="text-sm bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-fit">
-                  Lihat Demo
-                </button>
               </div>
+              <h3 className="text-[30px] font-bold text-white mb-4">
+                {demo.title}
+              </h3>
+              <button className="text-[20px] bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-fit">
+                Detail Website
+              </button>
             </div>
           </div>
         ))}
