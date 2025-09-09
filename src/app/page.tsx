@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { 
   animateHeroSection, 
   animateServicesSection, 
@@ -8,9 +10,13 @@ import {
   initScrollAnimations,
   animateServiceCardHover
 } from "@/lib/gsapAnimations";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import DemoWebsiteSection from "@/components/DemoWebsiteSection";
+
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // Icon Components
 const WebDevelopmentIcon = () => (
@@ -65,6 +71,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   // Initialize animations when component mounts
   useEffect(() => {
@@ -77,6 +84,39 @@ export default function Home() {
     
     // Initialize scroll animations
     initScrollAnimations();
+    
+    // Animate blob elements
+    if (typeof window !== 'undefined') {
+      blobRefs.current.forEach((blob, index) => {
+        if (blob) {
+          const timeline = gsap.timeline({
+            repeat: -1,
+            yoyo: true,
+            delay: index * 2
+          });
+          
+          timeline.to(blob, {
+            y: 30,
+            scale: 1.2,
+            rotation: 15,
+            duration: 3,
+            ease: "power1.inOut"
+          }).to(blob, {
+            y: -30,
+            scale: 1,
+            rotation: -15,
+            duration: 3,
+            ease: "power1.inOut"
+          }).to(blob, {
+            y: 0,
+            scale: 1.2,
+            rotation: 0,
+            duration: 3,
+            ease: "power1.inOut"
+          });
+        }
+      });
+    }
     
     // Setup custom cursor
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -200,24 +240,38 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6">
-            {heroTitleWords.map((word, index) => (
-              <span key={index} className="animated-word inline-block mr-2">
-                {word}
-              </span>
-            ))}
-          </h1>
-          <p className="hero-subtitle text-2xl text-gray-600 mb-10">
-            Kami membangun aplikasi dan website yang skalabel menggunakan teknologi terkini.
-          </p>
-          <div className="hero-buttons flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gray-900 text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium hover-target">
-              Mulai Proyek Anda
-            </button>
-            <button className="border-2 border-gray-900 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors text-lg font-medium hover-target">
-              Lihat Karya Kami
-            </button>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Kolom Kiri - Konten Hero */}
+          <div>
+            <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6">
+              {heroTitleWords.map((word, index) => (
+                <span key={index} className="animated-word inline-block mr-2">
+                  {word}
+                </span>
+              ))}
+            </h1>
+            <p className="hero-subtitle text-2xl text-gray-600 mb-10">
+              Di <span className="font-bold text-3xl heejra-animated">Heejra</span>,kami bersemangat dalam mengubah ide menjadi pengalaman digital yang bermakna. Sebagai agensi digital yang visioner, kami spesialis dalam menyediakan solusi kreatif, strategi inovatif, dan desain yang berpusat pada pengguna untuk membantu merek berkembang di lanskap digital yang terus berubah.
+            </p>
+          </div>
+          
+          {/* Kolom Kanan - Blob Animation */}
+          <div className="flex justify-center items-center">
+            <div className="relative w-80 h-80 flex items-center justify-center">
+              {/* Blob Elements */}
+              <div 
+                ref={(el) => { if (el) blobRefs.current[0] = el; }}
+                className="blob blob-purple absolute w-32 h-32 rounded-full blur-xl bg-purple-500 opacity-70"
+              ></div>
+              <div 
+                ref={(el) => { if (el) blobRefs.current[1] = el; }}
+                className="blob blob-pink absolute w-24 h-24 rounded-full blur-xl bg-pink-500 opacity-70"
+              ></div>
+              <div 
+                ref={(el) => { if (el) blobRefs.current[2] = el; }}
+                className="blob blob-violet absolute w-28 h-28 rounded-full blur-xl bg-violet-500 opacity-70"
+              ></div>
+            </div>
           </div>
         </div>
       </section>
@@ -264,6 +318,14 @@ export default function Home() {
             100% { transform: translateX(-50%); }
           }
           
+          @keyframes colorChange {
+            0% { color: #4F46E5; }
+            25% { color: #10B981; }
+            50% { color: #8B5CF6; }
+            75% { color: #F59E0B; }
+            100% { color: #4F46E5; }
+          }
+          
           .marquee-container {
             display: flex;
             width: 100%;
@@ -282,6 +344,11 @@ export default function Home() {
           
           .star {
             display: inline-block;
+          }
+          
+          .heejra-animated {
+            display: inline-block;
+            animation: colorChange 3s ease-in-out infinite;
           }
         `}</style>
         <div className="marquee-container">
@@ -394,7 +461,7 @@ export default function Home() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-green-800 to-purple-700"></div>
-                <span className="text-xl font-bold">TechCraft</span>
+                <span className="text-2xl font-bold">TechCraft</span>
               </div>
               <p className="text-gray-600">
                 Membangun solusi web dan mobile kustom untuk bisnis di seluruh dunia.

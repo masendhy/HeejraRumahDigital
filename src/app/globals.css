@@ -79,3 +79,18 @@ body {
 .hover-scale:hover {
   transform: scale(1.05);
 }
+
+/* Heejra text animation */
+@keyframes heejraPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.heejra-animated {
+  display: inline-block;
+  animation: heejraPulse 1.5s ease-in-out infinite;
+}

@@ -19,12 +19,6 @@ export const animateHeroSection = () => {
     { opacity: 0, y: 30 },
     { opacity: 1, y: 0, duration: 1, delay: 0.4 }
   );
-  
-  gsap.fromTo(
-    ".hero-buttons",
-    { opacity: 0, y: 30 },
-    { opacity: 1, y: 0, duration: 1, delay: 0.6 }
-  );
 };
 
 export const animateServicesSection = () => {
