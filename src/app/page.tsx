@@ -12,11 +12,7 @@ import {
 } from "@/lib/gsapAnimations";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import DemoWebsiteSection from "@/components/DemoWebsiteSection";
-
-// Register GSAP plugins
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import CraneAnimation from "@/components/CraneAnimation";
 
 // Icon Components
 const WebDevelopmentIcon = () => (
@@ -69,7 +65,9 @@ const UIUXDesignIcon = () => (
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorInnerRef = useRef<HTMLDivElement>(null);
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -85,34 +83,55 @@ export default function Home() {
     // Initialize scroll animations
     initScrollAnimations();
     
-    // Animate blob elements
+    // Animate blob elements with sequential animation
     if (typeof window !== 'undefined') {
+      // Create a single timeline for all blobs to animate sequentially
+      const masterTimeline = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 1
+      });
+      
+      // Animate each blob sequentially
       blobRefs.current.forEach((blob, index) => {
         if (blob) {
-          const timeline = gsap.timeline({
-            repeat: -1,
-            yoyo: true,
-            delay: index * 2
-          });
+          // Initially hide all blobs except the first one
+          if (index > 0) {
+            gsap.set(blob, { opacity: 0, scale: 0.8 });
+          } else {
+            gsap.set(blob, { opacity: 0.7, scale: 1 });
+          }
           
-          timeline.to(blob, {
-            y: 30,
+          // Add animation to master timeline
+          masterTimeline.to(blob, {
+            opacity: 0.7,
+            scale: 1,
+            duration: 1,
+            ease: "power2.inOut"
+          }, index > 0 ? "+=0.5" : 0) // Stagger the animations
+          .to(blob, {
+            y: 40,
+            x: 30,
             scale: 1.2,
             rotation: 15,
-            duration: 3,
+            duration: 2,
             ease: "power1.inOut"
-          }).to(blob, {
+          })
+          .to(blob, {
             y: -30,
-            scale: 1,
-            rotation: -15,
-            duration: 3,
+            x: -20,
+            scale: 0.9,
+            rotation: -10,
+            duration: 2,
             ease: "power1.inOut"
-          }).to(blob, {
+          })
+          .to(blob, {
             y: 0,
-            scale: 1.2,
+            x: 0,
+            scale: 1,
             rotation: 0,
-            duration: 3,
-            ease: "power1.inOut"
+            opacity: 0,
+            duration: 1,
+            ease: "power2.inOut"
           });
         }
       });
@@ -212,7 +231,7 @@ export default function Home() {
   const heroTitleWords = ["Solusi", "Web", "&", "App", "Kustom", "untuk", "Bisnis", "Modern"];
 
   // Deteksi perangkat mobile
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isMobile = typeof window !== 'undefined' ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) : false;
 
   // Colors for the asterisks
   const starColors = [
@@ -232,10 +251,26 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Custom Cursor - hanya ditampilkan di desktop */}
       {!isMobile && (
-        <div
-          ref={cursorRef}
-          className="fixed w-4 h-4 rounded-full bg-violet-500 pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2"
-        />
+        <>
+          <div
+            ref={cursorRef}
+            className="fixed w-6 h-6 rounded-full pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2"
+            style={{ 
+              mixBlendMode: 'difference',
+              transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)',
+              willChange: 'transform'
+            }}
+          >
+            <div 
+              ref={cursorInnerRef}
+              className={`w-full h-full rounded-full ${isHovering ? 'bg-violet-400' : 'bg-violet-500'} shadow-2xl`}
+              style={{ 
+                transition: 'all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)',
+                transform: isHovering ? 'scale(1.6)' : 'scale(1)'
+              }}
+            />
+          </div>
+        </>
       )}
 
       {/* Hero Section */}
@@ -258,18 +293,30 @@ export default function Home() {
           {/* Kolom Kanan - Blob Animation */}
           <div className="flex justify-center items-center">
             <div className="relative w-80 h-80 flex items-center justify-center">
-              {/* Blob Elements */}
+              {/* Blob Elements - Sekarang hanya satu blob yang aktif pada satu waktu */}
               <div 
                 ref={(el) => { if (el) blobRefs.current[0] = el; }}
-                className="blob blob-purple absolute w-32 h-32 rounded-full blur-xl bg-purple-500 opacity-70"
+                className="blob blob-purple absolute w-40 h-40 rounded-full blur-xl bg-purple-500 opacity-70"
               ></div>
               <div 
                 ref={(el) => { if (el) blobRefs.current[1] = el; }}
-                className="blob blob-pink absolute w-24 h-24 rounded-full blur-xl bg-pink-500 opacity-70"
+                className="blob blob-pink absolute w-36 h-36 rounded-full blur-xl bg-pink-500 opacity-70"
               ></div>
               <div 
                 ref={(el) => { if (el) blobRefs.current[2] = el; }}
-                className="blob blob-violet absolute w-28 h-28 rounded-full blur-xl bg-violet-500 opacity-70"
+                className="blob blob-violet absolute w-32 h-32 rounded-full blur-xl bg-violet-500 opacity-70"
+              ></div>
+              <div 
+                ref={(el) => { if (el) blobRefs.current[3] = el; }}
+                className="blob blob-blue absolute w-28 h-28 rounded-full blur-xl bg-blue-500 opacity-70"
+              ></div>
+              <div 
+                ref={(el) => { if (el) blobRefs.current[4] = el; }}
+                className="blob blob-teal absolute w-36 h-36 rounded-full blur-xl bg-teal-500 opacity-70"
+              ></div>
+              <div 
+                ref={(el) => { if (el) blobRefs.current[5] = el; }}
+                className="blob blob-indigo absolute w-32 h-32 rounded-full blur-xl bg-indigo-500 opacity-70"
               ></div>
             </div>
           </div>
@@ -297,6 +344,8 @@ export default function Home() {
                 }
               }}
               className="service-item flex flex-row items-start p-8 bg-[#FFFFFFC0] rounded-2xl shadow-lg transition-all duration-300 group hover-target w-full"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
             >
               <div className="mr-6 mt-1 flex-shrink-0 w-16 h-16 flex items-center justify-center text-gray-800">
                 {service.icon}
@@ -413,29 +462,6 @@ export default function Home() {
       {/* Demo Website Section */}
       <DemoWebsiteSection />
 
-      {/* Testimonials */}
-      <section id="testimonials" className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Apa Kata Klien Kami</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Jangan hanya mengambil kata kami - dengar dari bisnis yang telah kami bantu mentransformasi
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className="testimonial-card bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover-target">
-              <div className="text-yellow-400 text-2xl mb-4">★★★★★</div>
-              <p className="text-gray-600 mb-6 italic">&quot;{testimonial.content}&quot;</p>
-              <div>
-                <div className="font-bold">{testimonial.name}</div>
-                <div className="text-gray-500">{testimonial.role}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Contact CTA */}
       <section id="contact" className="py-20 px-6 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
@@ -444,12 +470,47 @@ export default function Home() {
             Mari kita diskusikan bagaimana kami dapat membantu mewujudkan visi Anda dengan layanan pengembangan ahli kami.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 transition-colors text-lg font-medium hover-target">
+            <button 
+              className="bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 transition-colors text-lg font-medium hover-target"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
               Hubungi Kami
             </button>
-            <button className="border-2 border-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium hover-target">
+            <button 
+              className="border-2 border-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium hover-target"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
               Jadwalkan Panggilan
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Animation Demo */}
+      <section className="py-20 px-6 bg-gray-100 text-gray-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Demo Animasi SVG</h2>
+          <p className="text-xl mb-10 max-w-2xl mx-auto">
+            Lihat contoh animasi SVG kami yang hanya aktif saat di-hover.
+          </p>
+          <div className="flex flex-col items-center">
+            <a 
+              href="/webdev-animation" 
+              className="bg-indigo-600 text-white px-8 py-4 rounded-lg hover:bg-indigo-700 transition-colors text-lg font-medium hover-target mb-8"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              Lihat Animasi
+            </a>
+            <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-2xl">
+              <p className="text-gray-600">
+                Kami menggunakan GSAP untuk membuat animasi yang halus dan interaktif. 
+                Animasi hanya dijalankan saat pengguna mengarahkan kursor ke elemen SVG, 
+                menghemat sumber daya dan memberikan pengalaman pengguna yang lebih baik.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -471,30 +532,138 @@ export default function Home() {
             <div>
               <h3 className="font-bold text-lg mb-4">Layanan</h3>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 hover-target">Pengembangan Web</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">Pengembangan Aplikasi</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">Desain Database</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">DevOps</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Pengembangan Web
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Pengembangan Aplikasi
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Desain Database
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    DevOps
+                  </a>
+                </li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-bold text-lg mb-4">Perusahaan</h3>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 hover-target">Tentang Kami</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">Portofolio</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">Karir</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">Kontak</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Tentang Kami
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Portofolio
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Karir
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Kontak
+                  </a>
+                </li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-bold text-lg mb-4">Terhubung</h3>
               <ul className="space-y-2 text-gray-600">
-                <li><a href="#" className="hover:text-gray-900 hover-target">Twitter</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">LinkedIn</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">GitHub</a></li>
-                <li><a href="#" className="hover:text-gray-900 hover-target">Instagram</a></li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    GitHub
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="hover:text-gray-900 hover-target"
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                  >
+                    Instagram
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

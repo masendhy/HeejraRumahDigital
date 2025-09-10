@@ -40,7 +40,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: "Jost", sans-serif;
-  cursor: none;
 }
 
 .dotted-background {
@@ -93,4 +92,79 @@ body {
 .heejra-animated {
   display: inline-block;
   animation: heejraPulse 1.5s ease-in-out infinite;
+}
+
+/* Blob animation styles */
+.blob {
+  filter: blur(40px);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.blob-purple {
+  background: linear-gradient(45deg, #8B5CF6, #A78BFA);
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.5);
+}
+
+.blob-pink {
+  background: linear-gradient(45deg, #EC4899, #F472B6);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.5);
+}
+
+.blob-violet {
+  background: linear-gradient(45deg, #7C3AED, #8B5CF6);
+  box-shadow: 0 0 50px rgba(124, 58, 237, 0.5);
+}
+
+.blob-blue {
+  background: linear-gradient(45deg, #3B82F6, #60A5FA);
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.5);
+}
+
+.blob-teal {
+  background: linear-gradient(45deg, #14B8A6, #2DD4BF);
+  box-shadow: 0 0 50px rgba(20, 184, 166, 0.5);
+}
+
+.blob-indigo {
+  background: linear-gradient(45deg, #6366F1, #818CF8);
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.5);
+}
+
+/* Custom cursor styles */
+.custom-cursor {
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  z-index: 9999;
+  will-change: transform;
+}
+
+.custom-cursor-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #8B5CF6;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              background-color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), 
+              height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform, width, height;
+}
+
+/* Hover effect for interactive elements */
+.hover-target {
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Media query for mobile devices - hide custom cursor */
+@media (max-width: 1024px) {
+  body {
+    cursor: auto !important;
+  }
+  
+  * {
+    cursor: auto !important;
+  }
 }
