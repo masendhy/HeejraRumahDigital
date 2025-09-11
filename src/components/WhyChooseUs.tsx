@@ -1,5 +1,5 @@
 import React from 'react';
-import chooseData from '@/../img/choose.json';
+
 
 // Interface untuk data why_choose_us
 interface WhyChooseUsItem {
@@ -14,7 +14,32 @@ interface WhyChooseUsData {
 }
 
 const WhyChooseUs = () => {
-  const data: WhyChooseUsData = chooseData.why_choose_us;
+  // Data why choose us
+  const data: WhyChooseUsData = {
+    heading: "Mengapa Memilih Kami",
+    items: [
+      {
+        id: "01",
+        title: "Layanan yang Komprehensif",
+        description: "Setiap bisnis punya tujuan, dan kami hadir untuk membantu Anda menyampaikannya melalui strategi digital yang efektif dan menyeluruh."
+      },
+      {
+        id: "02",
+        title: "Formulir Kontak yang Efektif",
+        description: "Formulir interaktif dan mudah digunakan untuk memudahkan pelanggan menjangkau Anda, sekaligus meningkatkan peluang konversi."
+      },
+      {
+        id: "03",
+        title: "Analisis Kinerja Berbasis Data",
+        description: "Setiap keputusan didukung data yang akurat, sehingga strategi yang dijalankan dapat memberikan hasil yang terukur."
+      },
+      {
+        id: "04",
+        title: "Pilihan Harga Layanan yang Fleksibel",
+        description: "Kami menawarkan pilihan harga yang fleksibel dan transparan, disesuaikan dengan kebutuhan bisnis Anda tanpa kompromi terhadap kualitas layanan."
+      }
+    ]
+  };
 
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">

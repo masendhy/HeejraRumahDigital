@@ -488,32 +488,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Animation Demo */}
-      <section className="py-20 px-6 bg-gray-100 text-gray-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Demo Animasi SVG</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto">
-            Lihat contoh animasi SVG kami yang hanya aktif saat di-hover.
-          </p>
-          <div className="flex flex-col items-center">
-            <a 
-              href="/webdev-animation" 
-              className="bg-indigo-600 text-white px-8 py-4 rounded-lg hover:bg-indigo-700 transition-colors text-lg font-medium hover-target mb-8"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-            >
-              Lihat Animasi
-            </a>
-            <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-2xl">
-              <p className="text-gray-600">
-                Kami menggunakan GSAP untuk membuat animasi yang halus dan interaktif. 
-                Animasi hanya dijalankan saat pengguna mengarahkan kursor ke elemen SVG, 
-                menghemat sumber daya dan memberikan pengalaman pengguna yang lebih baik.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-gray-200">
