@@ -199,6 +199,14 @@
 			c0,12.33,10.03,22.36,22.36,22.36s22.36-10.03,22.36-22.36C588.69,583.08,578.66,573.05,566.33,573.05z"/>
 	</g>
 </g>
+<g id="cahaya">
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="553.4202" y1="316.211" x2="554.5613" y2="787.562">
+		<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<polygon opacity="0.7" fill="url(#SVGID_1_)" points="553.46,331.39 806.48,331.39 670.41,662.73 553.46,662.73 436.51,662.73 
+		300.43,331.39 	"/>
+</g>
 <g id="laptop">
 	<g>
 		<g>
@@ -353,12 +361,6 @@
 					S605.28,782.17,603.71,784.73z"/>
 			</g>
 		</g>
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="553.4202" y1="316.211" x2="554.5613" y2="787.562">
-			<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
-			<stop  offset="1" style="stop-color:#FFFFFF"/>
-		</linearGradient>
-		<polygon opacity="0.7" fill="url(#SVGID_1_)" points="553.46,331.39 806.48,331.39 670.41,662.73 553.46,662.73 436.51,662.73 
-			300.43,331.39 		"/>
 		<path fill="#B5C6CF" d="M553.46,776.54l144.04-3.89c0,0,45.63-151.27,28.39-164.24c-17.24-12.96-172.43-11.96-172.43-11.96
 			s-155.2-1-172.43,11.96c-17.24,12.96,28.39,164.24,28.39,164.24L553.46,776.54z"/>
 		
