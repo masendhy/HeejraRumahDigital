@@ -17,13 +17,13 @@ const DemoWebsiteSection = () => {
     },
     {
       id: 3,
-      image: '/showroom-new.jpg',
+      image: '/showroom-display.jpg',
       category: 'Company Profile',
       title: 'Demo Website Perusahaan',
     },
     {
       id: 4,
-      image: '/showroom-new.jpg',
+      image: '/travel.jpg',
       category: 'Marketing',
       title: 'Demo Katalog Produk Digital',
     },

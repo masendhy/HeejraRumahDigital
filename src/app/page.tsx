@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { 
@@ -13,6 +14,7 @@ import {
 import WhyChooseUs from "@/components/WhyChooseUs";
 import DemoWebsiteSection from "@/components/DemoWebsiteSection";
 import CraneAnimation from "@/components/CraneAnimation";
+import GirlSVG from "@/components/GirlSVG";
 
 // Icon Components
 const WebDevelopmentIcon = () => (
@@ -83,7 +85,35 @@ export default function Home() {
     // Initialize scroll animations
     initScrollAnimations();
     
-    // Animate blob elements with sequential animation
+    // Setup custom cursor
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!isMobile) {
+      const onMouseMove = (e: MouseEvent) => {
+        if (cursorRef.current) {
+          // Posisi kursor langsung sesuai dengan koordinat mouse
+          cursorRef.current.style.left = `${e.clientX}px`;
+          cursorRef.current.style.top = `${e.clientY}px`;
+        }
+      };
+      
+      // Gunakan passive event listener untuk performa yang lebih baik
+      window.addEventListener('mousemove', onMouseMove, { passive: true });
+      
+      return () => {
+        window.removeEventListener('mousemove', onMouseMove);
+      };
+    }
+    
+    // Refresh ScrollTrigger when component unmounts
+    return () => {
+      if (typeof window !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
+    };
+  }, []);
+
+  // Animate blob elements in services section
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       // Create a single timeline for all blobs to animate sequentially
       const masterTimeline = gsap.timeline({
@@ -137,29 +167,14 @@ export default function Home() {
       });
     }
     
-    // Setup custom cursor
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    if (!isMobile) {
-      const onMouseMove = (e: MouseEvent) => {
-        if (cursorRef.current) {
-          // Posisi kursor langsung sesuai dengan koordinat mouse
-          cursorRef.current.style.left = `${e.clientX}px`;
-          cursorRef.current.style.top = `${e.clientY}px`;
-        }
-      };
-      
-      // Gunakan passive event listener untuk performa yang lebih baik
-      window.addEventListener('mousemove', onMouseMove, { passive: true });
-      
-      return () => {
-        window.removeEventListener('mousemove', onMouseMove);
-      };
-    }
-    
-    // Refresh ScrollTrigger when component unmounts
+    // Cleanup function
     return () => {
       if (typeof window !== 'undefined') {
-        ScrollTrigger.refresh();
+        blobRefs.current.forEach(blob => {
+          if (blob) {
+            gsap.killTweensOf(blob);
+          }
+        });
       }
     };
   }, []);
@@ -290,42 +305,54 @@ export default function Home() {
             </p>
           </div>
           
-          {/* Kolom Kanan - Blob Animation */}
+          {/* Kolom Kanan - Girl SVG */}
           <div className="flex justify-center items-center">
-            <div className="relative w-80 h-80 flex items-center justify-center">
-              {/* Blob Elements - Sekarang hanya satu blob yang aktif pada satu waktu */}
-              <div 
-                ref={(el) => { if (el) blobRefs.current[0] = el; }}
-                className="blob blob-purple absolute w-40 h-40 rounded-full blur-xl bg-purple-500 opacity-70"
-              ></div>
-              <div 
-                ref={(el) => { if (el) blobRefs.current[1] = el; }}
-                className="blob blob-pink absolute w-36 h-36 rounded-full blur-xl bg-pink-500 opacity-70"
-              ></div>
-              <div 
-                ref={(el) => { if (el) blobRefs.current[2] = el; }}
-                className="blob blob-violet absolute w-32 h-32 rounded-full blur-xl bg-violet-500 opacity-70"
-              ></div>
-              <div 
-                ref={(el) => { if (el) blobRefs.current[3] = el; }}
-                className="blob blob-blue absolute w-28 h-28 rounded-full blur-xl bg-blue-500 opacity-70"
-              ></div>
-              <div 
-                ref={(el) => { if (el) blobRefs.current[4] = el; }}
-                className="blob blob-teal absolute w-36 h-36 rounded-full blur-xl bg-teal-500 opacity-70"
-              ></div>
-              <div 
-                ref={(el) => { if (el) blobRefs.current[5] = el; }}
-                className="blob blob-indigo absolute w-32 h-32 rounded-full blur-xl bg-indigo-500 opacity-70"
-              ></div>
+            <div className="relative w-96 h-96 md:w-[500px] md:h-[500px] flex items-center justify-center">
+              <GirlSVG />
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+      <section id="services" className="py-20 px-6 max-w-7xl mx-auto relative overflow-hidden">
+        {/* Blob Background Animation */}
+        <div className="absolute inset-0 z-0">
+          <div className="relative w-full h-full">
+            <div 
+              ref={(el) => { if (el) blobRefs.current[0] = el; }}
+              className="blob blob-purple absolute w-64 h-64 rounded-full blur-xl bg-purple-500 opacity-70"
+              style={{ top: '10%', left: '10%' }}
+            ></div>
+            <div 
+              ref={(el) => { if (el) blobRefs.current[1] = el; }}
+              className="blob blob-pink absolute w-56 h-56 rounded-full blur-xl bg-pink-500 opacity-70"
+              style={{ top: '20%', right: '15%' }}
+            ></div>
+            <div 
+              ref={(el) => { if (el) blobRefs.current[2] = el; }}
+              className="blob blob-violet absolute w-48 h-48 rounded-full blur-xl bg-violet-500 opacity-70"
+              style={{ bottom: '30%', left: '20%' }}
+            ></div>
+            <div 
+              ref={(el) => { if (el) blobRefs.current[3] = el; }}
+              className="blob blob-blue absolute w-40 h-40 rounded-full blur-xl bg-blue-500 opacity-70"
+              style={{ bottom: '20%', right: '25%' }}
+            ></div>
+            <div 
+              ref={(el) => { if (el) blobRefs.current[4] = el; }}
+              className="blob blob-teal absolute w-56 h-56 rounded-full blur-xl bg-teal-500 opacity-70"
+              style={{ top: '40%', left: '40%' }}
+            ></div>
+            <div 
+              ref={(el) => { if (el) blobRefs.current[5] = el; }}
+              className="blob blob-indigo absolute w-48 h-48 rounded-full blur-xl bg-indigo-500 opacity-70"
+              style={{ top: '60%', right: '30%' }}
+            ></div>
+          </div>
+        </div>
+        
+        <div className="text-center mb-16 relative z-10">
           <h2 className="services-title text-3xl md:text-4xl font-bold mb-4 text-gray-800">
             Layanan Kami
           </h2>
@@ -334,7 +361,7 @@ export default function Home() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto relative z-10">
           {services.map((service, index) => (
             <div 
               key={index} 

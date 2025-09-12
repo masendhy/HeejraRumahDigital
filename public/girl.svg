@@ -2,19 +2,6 @@
 <!-- Generator: Adobe Illustrator 25.3.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1080 1080" enable-background="new 0 0 1080 1080" xml:space="preserve">
-<style type="text/css">
-	@keyframes blink {
-		0%, 100% { opacity: 1; }
-		50% { opacity: 0; }
-	}
-	#pink {
-		animation: blink 2s infinite;
-	}
-	#green {
-		animation: blink 2s infinite;
-		animation-delay: 1s;
-	}
-</style>
 <g id="badan">
 	<g>
 		<path fill="#00F4B0" d="M648.72,437.99c-16.06,0-29.13-13.07-29.13-29.13c0-10.17,5.42-19.74,14.14-24.98
