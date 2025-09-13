@@ -243,7 +243,7 @@ export default function Home() {
   ];
 
   // Split the hero title into words for animation
-  const heroTitleWords = ["Solusi", "Web", "&", "App", "Kustom", "untuk", "Bisnis", "Modern"];
+  const heroTitleWords = ["Selamat", "Datang", "di", "Heejra"];
 
   // Deteksi perangkat mobile
   const isMobile = typeof window !== 'undefined' ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) : false;
@@ -295,13 +295,13 @@ export default function Home() {
           <div>
             <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6">
               {heroTitleWords.map((word, index) => (
-                <span key={index} className="animated-word inline-block mr-2">
+                <span key={index} className={`animated-word inline-block mr-2 ${word === 'Heejra' ? 'bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent' : ''}`}>
                   {word}
                 </span>
               ))}
             </h1>
             <p className="hero-subtitle text-2xl text-gray-600 mb-10">
-              Di <span className="font-bold text-3xl heejra-animated">Heejra</span>,kami bersemangat dalam mengubah ide menjadi pengalaman digital yang bermakna. Sebagai agensi digital yang visioner, kami spesialis dalam menyediakan solusi kreatif, strategi inovatif, dan desain yang berpusat pada pengguna untuk membantu merek berkembang di lanskap digital yang terus berubah.
+              Di <span className="font-bold text-3xl bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Heejra</span>,kami bersemangat dalam mengubah ide menjadi pengalaman digital yang bermakna. Sebagai agensi digital yang visioner, kami spesialis dalam menyediakan solusi kreatif, strategi inovatif, dan desain yang berpusat pada pengguna untuk membantu merek berkembang di lanskap digital yang terus berubah.
             </p>
           </div>
           
@@ -354,7 +354,7 @@ export default function Home() {
         
         <div className="text-center mb-16 relative z-10">
           <h2 className="services-title text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-            Layanan Kami
+            Solusi Web&App Kustom untuk Bisnis Modern
           </h2>
           <p className="text-2xl text-gray-600 max-w-2xl mx-auto">
             Kami menyediakan solusi pengembangan end-to-end yang disesuaikan dengan kebutuhan bisnis Anda
@@ -395,11 +395,11 @@ export default function Home() {
           }
           
           @keyframes colorChange {
-            0% { color: #4F46E5; }
-            25% { color: #10B981; }
-            50% { color: #8B5CF6; }
-            75% { color: #F59E0B; }
-            100% { color: #4F46E5; }
+            0% { color: #414b59; }
+            25% { color: #414b59; }
+            50% { color: #414b59; }
+            75% { color: #414b59; }
+            100% { color: #414b59; }
           }
           
           .marquee-container {
@@ -423,8 +423,8 @@ export default function Home() {
           }
           
           .heejra-animated {
+            color: #414b59;
             display: inline-block;
-            animation: colorChange 3s ease-in-out infinite;
           }
         `}</style>
         <div className="marquee-container">

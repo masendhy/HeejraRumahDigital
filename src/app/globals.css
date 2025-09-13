@@ -89,11 +89,6 @@ body {
   }
 }
 
-.heejra-animated {
-  display: inline-block;
-  animation: heejraPulse 1.5s ease-in-out infinite;
-}
-
 /* Blob animation styles */
 .blob {
   filter: blur(40px);
