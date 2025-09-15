@@ -5,6 +5,9 @@ const GirlSVG = () => {
   const cahayaRef = useRef<SVGPolygonElement>(null);
   const pinkRef = useRef<SVGCircleElement>(null);
   const greenRef = useRef<SVGEllipseElement>(null);
+  const ulerIjoRef = useRef<SVGGElement>(null);
+  const ulerBiru1Ref = useRef<SVGGElement>(null);
+  const ulerBiru2Ref = useRef<SVGGElement>(null);
   const stigapink2Ref = useRef<SVGGElement>(null);
   const stigapink1Ref = useRef<SVGGElement>(null);
   const stigabiru2Ref = useRef<SVGGElement>(null);
@@ -193,6 +196,111 @@ const GirlSVG = () => {
         if (stigabiru2Ref.current) gsap.killTweensOf(stigabiru2Ref.current);
         if (stigapink1Ref.current) gsap.killTweensOf(stigapink1Ref.current);
         if (stigapink2Ref.current) gsap.killTweensOf(stigapink2Ref.current);
+      }
+    };
+  }, []);
+
+  // Animasi berjalan ditempat untuk elemen ular
+  useEffect(() => {
+    let ulerIjoTimeline: gsap.core.Timeline | null = null;
+    let ulerBiru1Timeline: gsap.core.Timeline | null = null;
+    let ulerBiru2Timeline: gsap.core.Timeline | null = null;
+
+    const initUlarAnimations = () => {
+      if (typeof window !== 'undefined' && gsap) {
+        // Animasi berjalan ditempat untuk uler-ijo
+        if (ulerIjoRef.current) {
+          ulerIjoTimeline = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 0,
+            yoyo: true
+          });
+          
+          ulerIjoTimeline.to(ulerIjoRef.current, {
+            x: 2,
+            y: 1,
+            rotation: 2,
+            duration: 0.8,
+            ease: "power1.inOut"
+          })
+          .to(ulerIjoRef.current, {
+            x: -1,
+            y: -2,
+            rotation: -1,
+            duration: 0.8,
+            ease: "power1.inOut"
+          });
+        }
+        
+        // Animasi berjalan ditempat untuk uler-biru1
+        if (ulerBiru1Ref.current) {
+          ulerBiru1Timeline = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 0.3,
+            yoyo: true
+          });
+          
+          ulerBiru1Timeline.to(ulerBiru1Ref.current, {
+            x: -1,
+            y: 2,
+            rotation: -1.5,
+            duration: 0.9,
+            ease: "power1.inOut"
+          })
+          .to(ulerBiru1Ref.current, {
+            x: 2,
+            y: -1,
+            rotation: 1.5,
+            duration: 0.9,
+            ease: "power1.inOut"
+          });
+        }
+        
+        // Animasi berjalan ditempat untuk uler-biru2
+        if (ulerBiru2Ref.current) {
+          ulerBiru2Timeline = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 0.6,
+            yoyo: true
+          });
+          
+          ulerBiru2Timeline.to(ulerBiru2Ref.current, {
+            x: 1.5,
+            y: -1.5,
+            rotation: 1,
+            duration: 1,
+            ease: "power1.inOut"
+          })
+          .to(ulerBiru2Ref.current, {
+            x: -2,
+            y: 1,
+            rotation: -1,
+            duration: 1,
+            ease: "power1.inOut"
+          });
+        }
+      }
+    };
+
+    // Gunakan setTimeout untuk memastikan elemen sudah dirender
+    const timeoutId = setTimeout(() => {
+      initUlarAnimations();
+    }, 700);
+
+    // Cleanup function
+    return () => {
+      clearTimeout(timeoutId);
+      
+      if (typeof window !== 'undefined') {
+        if (ulerIjoTimeline) {
+          ulerIjoTimeline.kill();
+        }
+        if (ulerBiru1Timeline) {
+          ulerBiru1Timeline.kill();
+        }
+        if (ulerBiru2Timeline) {
+          ulerBiru2Timeline.kill();
+        }
       }
     };
   }, []);
@@ -734,7 +842,7 @@ const GirlSVG = () => {
           S773.81,220.34,761.58,220.34z M761.58,185.58c-6.94,0-12.59,5.65-12.59,12.59c0,6.94,5.65,12.59,12.59,12.59
           c6.94,0,12.59-5.65,12.59-12.59C774.17,191.23,768.53,185.58,761.58,185.58z"/>
       </g>
-      <g id="uler-biru2">
+      <g id="uler-biru2" ref={ulerBiru2Ref}>
         <path fill="#4E5FF0" d="M339.36,215.15c-10.36,0-15.36-8.01-19.78-15.07c-4.55-7.28-7.74-11.7-13.69-11.7
           c-5.95,0-9.14,4.42-13.69,11.7c-4.42,7.07-9.42,15.07-19.78,15.07c-10.36,0-15.36-8.01-19.78-15.07
           c-4.55-7.28-7.74-11.7-13.69-11.7c-1.98,0-3.59-1.61-3.59-3.59c0-1.98,1.61-3.59,3.59-3.59c10.36,0,15.36,8.01,19.78,15.07
@@ -742,7 +850,7 @@ const GirlSVG = () => {
           c4.55,7.28,7.74,11.7,13.69,11.7c5.95,0,9.14-4.42,13.69-11.7c4.42-7.07,9.42-15.07,19.78-15.07c1.98,0,3.59,1.61,3.59,3.59
           c0,1.98-1.61,3.59-3.59,3.59c-5.95,0-9.14,4.42-13.69,11.7C354.72,207.14,349.72,215.15,339.36,215.15z"/>
       </g>
-      <g id="uler-biru1">
+      <g id="uler-biru1" ref={ulerBiru1Ref}>
         <path fill="#4E5FF0" d="M166.41,766.65c-10.36,0-15.36-8.01-19.78-15.07c-4.55-7.28-7.74-11.7-13.69-11.7
           c-5.95,0-9.14,4.42-13.69,11.7c-4.42,7.07-9.42,15.07-19.78,15.07c-10.36,0-15.36-8.01-19.78-15.07
           c-4.55-7.28-7.74-11.7-13.69-11.7c-1.98,0-3.59-1.61-3.59-3.59c0-1.98,1.61-3.59,3.59-3.59c10.36,0,15.36,8.01,19.78,15.07
@@ -750,7 +858,7 @@ const GirlSVG = () => {
           c4.55,7.28,7.74,11.7,13.69,11.7c5.95,0,9.14-4.42,13.69-11.7c4.42-7.07,9.42-15.07,19.78-15.07c1.98,0,3.59,1.61,3.59,3.59
           c0,1.98-1.61,3.59-3.59,3.59c-5.95,0-9.14,4.42-13.69,11.7C181.78,758.64,176.77,766.65,166.41,766.65z"/>
       </g>
-      <g id="uler-ijo">
+      <g id="uler-ijo" ref={ulerIjoRef}>
         <path fill="#00F4B0" d="M922.64,489.04c-10.36,0-15.36-8.01-19.78-15.07c-4.55-7.28-7.74-11.7-13.69-11.7
           c-5.95,0-9.14,4.42-13.69,11.7c-4.42,7.07-9.42,15.07-19.78,15.07c-10.36,0-15.36-8.01-19.78-15.07
           c-4.55-7.28-7.74-11.7-13.69-11.7c-1.98,0-3.59-1.61-3.59-3.59s1.61-3.59,3.59-3.59c10.36,0,15.36,8.01,19.78,15.07
