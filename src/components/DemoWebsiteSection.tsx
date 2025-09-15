@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DemoWebsiteSection = () => {
-  // Data untuk demo website
+  // Data untuk demo website - hanya 2 card yang tersisa
   const demoData = [
     {
       id: 1,
@@ -14,19 +14,7 @@ const DemoWebsiteSection = () => {
       image: '/travel.jpg',
       category: 'App,Marketing',
       title: 'Demo Startup Landing Page',
-    },
-    {
-      id: 3,
-      image: '/showroom-display.jpg',
-      category: 'Company Profile',
-      title: 'Demo Website Perusahaan',
-    },
-    {
-      id: 4,
-      image: '/travel.jpg',
-      category: 'Marketing',
-      title: 'Demo Katalog Produk Digital',
-    },
+    }
   ];
 
   return (
@@ -47,7 +35,6 @@ const DemoWebsiteSection = () => {
             className={`
               rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl
               ${index === 0 ? 'md:translate-y-4' : ''}
-              ${index === 3 ? 'md:-translate-y-4' : ''}
             `}
           >
             <div className="relative">
