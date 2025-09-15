@@ -3,6 +3,8 @@ import gsap from 'gsap';
 
 const GirlSVG = () => {
   const cahayaRef = useRef<SVGPolygonElement>(null);
+  const pinkRef = useRef<SVGCircleElement>(null);
+  const greenRef = useRef<SVGEllipseElement>(null);
   const stigapink2Ref = useRef<SVGGElement>(null);
   const stigapink1Ref = useRef<SVGGElement>(null);
   const stigabiru2Ref = useRef<SVGGElement>(null);
@@ -44,6 +46,75 @@ const GirlSVG = () => {
     return () => {
       if (typeof window !== 'undefined' && cahayaRef.current) {
         gsap.killTweensOf(cahayaRef.current);
+      }
+    };
+  }, []);
+
+  // Animasi berkedip untuk elemen pink dan green
+  useEffect(() => {
+    let pinkBlinkTimeline: gsap.core.Timeline | null = null;
+    let greenBlinkTimeline: gsap.core.Timeline | null = null;
+
+    const initAnimations = () => {
+      if (typeof window !== 'undefined' && gsap) {
+        // Animasi berkedip untuk elemen pink
+        if (pinkRef.current) {
+          pinkBlinkTimeline = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 1,
+            yoyo: true
+          });
+          
+          pinkBlinkTimeline.to(pinkRef.current, {
+            opacity: 0.3,
+            duration: 0.3,
+            ease: "power1.inOut"
+          })
+          .to(pinkRef.current, {
+            opacity: 1,
+            duration: 0.3,
+            ease: "power1.inOut"
+          }, "+=0.7");
+        }
+        
+        // Animasi berkedip untuk elemen green
+        if (greenRef.current) {
+          greenBlinkTimeline = gsap.timeline({
+            repeat: -1,
+            repeatDelay: 1.2,
+            yoyo: true
+          });
+          
+          greenBlinkTimeline.to(greenRef.current, {
+            opacity: 0.4,
+            duration: 0.4,
+            ease: "power1.inOut"
+          })
+          .to(greenRef.current, {
+            opacity: 1,
+            duration: 0.4,
+            ease: "power1.inOut"
+          }, "+=0.9");
+        }
+      }
+    };
+
+    // Gunakan setTimeout untuk memastikan elemen sudah dirender
+    const timeoutId = setTimeout(() => {
+      initAnimations();
+    }, 100);
+
+    // Cleanup function
+    return () => {
+      clearTimeout(timeoutId);
+      
+      if (typeof window !== 'undefined') {
+        if (pinkBlinkTimeline) {
+          pinkBlinkTimeline.kill();
+        }
+        if (greenBlinkTimeline) {
+          greenBlinkTimeline.kill();
+        }
       }
     };
   }, []);
@@ -689,10 +760,10 @@ const GirlSVG = () => {
       </g>
       <g id="green">
         
-          <ellipse transform="matrix(0.7071 -0.7071 0.7071 0.7071 -214.1567 260.8088)" fill="#00F4B0" cx="207.75" cy="388.91" rx="25.2" ry="25.2"/>
+          <ellipse ref={greenRef} transform="matrix(0.7071 -0.7071 0.7071 0.7071 -214.1567 260.8088)" fill="#00F4B0" cx="207.75" cy="388.91" rx="25.2" ry="25.2"/>
       </g>
       <g id="pink">
-        <circle fill="#FF9FCA" cx="532.79" cy="128.9" r="25.2"/>
+        <circle ref={pinkRef} fill="#FF9FCA" cx="532.79" cy="128.9" r="25.2"/>
         <g>
         </g>
         <g>
