@@ -308,7 +308,14 @@ const GirlSVG = () => {
   return (
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       viewBox="0 0 1080 1080" enableBackground="new 0 0 1080 1080" xmlSpace="preserve">
-      <g id="badan">
+      <g id="badan" style={{ transition: 'transform 0.3s ease', cursor: 'pointer' }}
+         onMouseEnter={(e) => {
+           const randomMove = Math.random() > 0.5 ? 10 : -10;
+           e.currentTarget.style.transform = `translateX(${randomMove}px)`;
+         }}
+         onMouseLeave={(e) => {
+           e.currentTarget.style.transform = 'translateX(0px)';
+         }}>
         <g>
           <path fill="#00F4B0" d="M648.72,437.99c-16.06,0-29.13-13.07-29.13-29.13c0-10.17,5.42-19.74,14.14-24.98
             c1.13-0.68,2.6-0.31,3.29,0.82c0.68,1.13,0.31,2.6-0.82,3.29c-7.4,4.45-11.82,12.25-11.82,20.88c0,13.42,10.92,24.34,24.34,24.34
