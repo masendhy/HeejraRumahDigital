@@ -3,6 +3,10 @@ import gsap from 'gsap';
 
 const GirlSVG = () => {
   const cahayaRef = useRef<SVGPolygonElement>(null);
+  const stigapink2Ref = useRef<SVGGElement>(null);
+  const stigapink1Ref = useRef<SVGGElement>(null);
+  const stigabiru2Ref = useRef<SVGGElement>(null);
+  const stigabiru1Ref = useRef<SVGGElement>(null);
 
   // Animasi berkedip untuk elemen cahaya di SVG
   useEffect(() => {
@@ -44,12 +48,98 @@ const GirlSVG = () => {
     };
   }, []);
 
+  // Animasi rotasi untuk elemen-elemen stiga
+  useEffect(() => {
+    // Fungsi untuk memulai animasi
+    const startAnimations = () => {
+      if (typeof window !== 'undefined' && gsap) {
+        console.log("Memulai animasi rotasi dengan GSAP");
+        
+        // Animasi rotasi untuk stigabiru-1 dengan durasi 8 detik
+        if (stigabiru1Ref.current) {
+          console.log("Menganimasi stigabiru-1 dengan GSAP", stigabiru1Ref.current);
+          gsap.to(stigabiru1Ref.current, {
+            rotation: 360,
+            transformOrigin: "50% 50%",
+            duration: 8,
+            repeat: -1,
+            ease: "none"
+          });
+        }
+        
+        // Animasi rotasi untuk stigabiru-2 dengan durasi 12 detik
+        if (stigabiru2Ref.current) {
+          console.log("Menganimasi stigabiru-2 dengan GSAP", stigabiru2Ref.current);
+          gsap.to(stigabiru2Ref.current, {
+            rotation: -360,
+            transformOrigin: "50% 50%",
+            duration: 12,
+            repeat: -1,
+            ease: "none"
+          });
+        }
+        
+        // Animasi rotasi untuk stigapink-1 dengan durasi 10 detik
+        if (stigapink1Ref.current) {
+          console.log("Menganimasi stigapink-1 dengan GSAP", stigapink1Ref.current);
+          gsap.to(stigapink1Ref.current, {
+            rotation: 360,
+            transformOrigin: "50% 50%",
+            duration: 10,
+            repeat: -1,
+            ease: "none"
+          });
+        }
+        
+        // Animasi rotasi untuk stigapink-2 dengan durasi 15 detik
+        if (stigapink2Ref.current) {
+          console.log("Menganimasi stigapink-2 dengan GSAP", stigapink2Ref.current);
+          gsap.to(stigapink2Ref.current, {
+            rotation: -360,
+            transformOrigin: "50% 50%",
+            duration: 15,
+            repeat: -1,
+            ease: "none"
+          });
+        }
+      }
+    };
+
+    // Gunakan requestAnimationFrame untuk memastikan elemen telah dirender
+    const rafId = requestAnimationFrame(() => {
+      // Tambahkan timeout tambahan untuk memastikan elemen benar-benar dirender
+      setTimeout(() => {
+        startAnimations();
+      }, 500);
+    });
+
+    // Cleanup function
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (typeof window !== 'undefined') {
+        console.log("Membersihkan animasi rotasi GSAP");
+        if (stigabiru1Ref.current) gsap.killTweensOf(stigabiru1Ref.current);
+        if (stigabiru2Ref.current) gsap.killTweensOf(stigabiru2Ref.current);
+        if (stigapink1Ref.current) gsap.killTweensOf(stigapink1Ref.current);
+        if (stigapink2Ref.current) gsap.killTweensOf(stigapink2Ref.current);
+      }
+    };
+  }, []);
+
   return (
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       viewBox="0 0 1080 1080" enableBackground="new 0 0 1080 1080" xmlSpace="preserve">
       <g id="badan">
         <g>
           <path fill="#00F4B0" d="M648.72,437.99c-16.06,0-29.13-13.07-29.13-29.13c0-10.17,5.42-19.74,14.14-24.98
+            c1.13-0.68,2.6-0.31,3.29,0.82c0.68,1.13,0.31,2.6-0.82,3.29c-7.4,4.45-11.82,12.25-11.82,20.88c0,13.42,10.92,24.34,24.34,24.34
+            c13.42,0,24.34-10.92,24.34-24.34c0-8.63-4.42-16.43-11.82-20.88c-1.13-0.68-2.6-0.31-3.29,0.82c-0.68,1.13-0.31,2.6,0.82,3.29
+            C677.85,424.92,664.78,437.99,648.72,437.99z"/>
+          <path fill="#00F4B0" d="M431.28,437.99c-16.06,0-29.13-13.07-29.13-29.13c0-10.17,5.42-19.74,14.14-24.98
+            c1.13-0.68,2.6-0.31,3.29,0.82c0.68,1.13,0.31,2.6-0.82,3.29c-7.4,4.45-11.82,12.25-11.82,20.88c0,13.42,10.92,24.34,24.34,24.34
+            c13.42,0,24.34-10.92,24.34-24.34c0-8.63-4.42-16.43-11.82-20.88c-1.13-0.68-2.6-0.31-3.29,0.82c-0.68,1.13-0.31,2.6,0.82,3.29
+            C452.15,424.92,439.08,437.99,431.28,437.99z"/>
+          <path fill="#00F4B0" d="M540,348.72c-16.06,0-29.13-13.07-29.13-29.13c0-10.17,5.42-19.74,14.14-24.98
             c1.13-0.68,2.6-0.31,3.29,0.82c0.68,1.13,0.31,2.6-0.82,3.29c-7.4,4.45-11.82,12.25-11.82,20.88c0,13.42,10.92,24.34,24.34,24.34
             c13.42,0,24.34-10.92,24.34-24.34c0-8.62-4.42-16.42-11.81-20.87c-1.13-0.68-1.5-2.15-0.82-3.29c0.68-1.13,2.15-1.5,3.29-0.82
             c8.85,5.32,14.13,14.66,14.13,24.98C677.85,424.92,664.78,437.99,648.72,437.99z"/>
@@ -60,6 +150,7 @@ const GirlSVG = () => {
           <path fill="#4E5FF0" d="M479.4,340.41c-26.46-20.43-48.58-77.31-13.82-101.74c34.76-24.42,116.22,22.46,158.95,58.19
             c42.73,35.73,50.92,57.03,58.78,75.51c62.82,7.73,77.14,68.82,44.93,96.94c60.2,1.17,86.62,62.15,66.03,97.1
             c35.35,14.76,47.39,47.39,47.39,56.71c-15.54,0-289.61,0-289.61,0"/>
+
           <path fill="#4E5FF0" d="M313.02,566.42c-20.59-34.96,5.83-95.94,66.03-97.1c-26.02-46.61,0.78-77.68,27.19-89.21
             c21.05-9.19,30.03-33.92,54.44-61.67h185.95c-5.35,8.96-11.9,16.69-18.74,21.97l-72.64,282.72c0,0-274.08,0-289.61,0
             C265.63,613.81,277.67,581.18,313.02,566.42z"/>
@@ -542,22 +633,22 @@ const GirlSVG = () => {
           c0.69,0.95,0.75,2.22,0.17,3.24c-0.58,1.02-1.71,1.6-2.87,1.5l-58.17-5.38c-1.01-0.09-1.91-0.7-2.38-1.6
           C423.92,734.47,423.94,733.39,424.45,732.5z M451.3,697.53l-19.36,33.91l46.98,4.34L451.3,697.53z"/>
       </g>
-      <g id="stigapink-2">
+      <g id="stigapink-2" ref={stigapink2Ref}>
         <path fill="#FF9FCA" d="M378.44,325.42l-39.86,27.34c-0.84,0.58-1.91,0.69-2.85,0.29c-0.94-0.39-1.61-1.24-1.79-2.24l-10.15-57.53
           c-0.2-1.16,0.29-2.32,1.25-2.99c0.97-0.66,2.23-0.7,3.24-0.09l50.01,30.19c0.87,0.53,1.42,1.46,1.44,2.47
           C379.77,323.88,379.28,324.84,378.44,325.42z M339.03,345.19l32.2-22.08l-40.39-24.39L339.03,345.19z"/>
       </g>
-      <g id="stigapink-1">
+      <g id="stigapink-1" ref={stigapink1Ref}>
         <path fill="#FF9FCA" d="M920.73,718.43l-44.27-19.41c-0.93-0.41-1.59-1.26-1.75-2.27c-0.16-1,0.2-2.02,0.96-2.7l43.49-39
           c0.87-0.78,2.12-0.98,3.2-0.51c1.07,0.47,1.78,1.53,1.79,2.7l0.78,58.41c0.01,1.02-0.49,1.97-1.34,2.53
           C922.74,718.75,921.67,718.84,920.73,718.43z M883.13,695.41l35.76,15.68l-0.63-47.18L883.13,695.41z"/>
       </g>
-      <g id="stigabiru-2">
+      <g id="stigabiru-2" ref={stigabiru2Ref}>
         <path fill="#4E5FF0" d="M812.33,366.13l-44.27-19.41c-0.93-0.41-1.59-1.26-1.75-2.27c-0.16-1,0.2-2.02,0.96-2.7l43.49-39
           c0.87-0.78,2.12-0.98,3.2-0.51c1.07,0.47,1.78,1.53,1.79,2.7l0.78,58.41c0.01,1.02-0.49,1.97-1.34,2.53
           C814.33,366.44,813.26,366.54,812.33,366.13z M774.72,343.1l35.75,15.68l-0.63-47.18L774.72,343.1z"/>
       </g>
-      <g id="stigabiru-1">
+      <g id="stigabiru-1" ref={stigabiru1Ref}>
         <path fill="#4E5FF0" d="M311.49,363.66l23.96-41.98c0.5-0.88,1.42-1.45,2.44-1.5c1.02-0.05,1.99,0.41,2.59,1.24l34.21,47.35
           c0.69,0.95,0.76,2.22,0.17,3.24c-0.58,1.02-1.71,1.6-2.87,1.5l-58.17-5.38c-1.01-0.09-1.91-0.7-2.38-1.6
           C310.96,365.63,310.98,364.55,311.49,363.66z M338.34,328.69l-19.36,33.91l46.98,4.34L338.34,328.69z"/>
