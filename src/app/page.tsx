@@ -72,6 +72,7 @@ export default function Home() {
   const cursorInnerRef = useRef<HTMLDivElement>(null);
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const contactSectionRef = useRef<HTMLDivElement>(null);
 
   // Initialize animations when component mounts
   useEffect(() => {
@@ -194,6 +195,28 @@ export default function Home() {
     return () => {
       cleanupFunctions.forEach(cleanup => cleanup());
     };
+  }, []);
+
+  // Animate contact section when it comes into view
+  useEffect(() => {
+    if (typeof window !== 'undefined' && contactSectionRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-contact-section');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      observer.observe(contactSectionRef.current);
+
+      return () => {
+        observer.unobserve(contactSectionRef.current);
+      };
+    }
   }, []);
 
   const services = [
@@ -490,24 +513,105 @@ export default function Home() {
       <DemoWebsiteSection />
 
       {/* Contact CTA */}
-      <section id="contact" className="py-20 px-6 bg-gray-900 text-white">
+      <section 
+        id="contact" 
+        ref={contactSectionRef}
+        className="py-20 px-6 text-white opacity-0 transition-opacity duration-1000"
+        style={{ backgroundColor: 'rgba(16, 24, 41, 0.9)' }}
+      >
+        <style jsx>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .animate-contact-section {
+            opacity: 1 !important;
+          }
+          
+          .animate-contact-section .animate-content {
+            animation: fadeInUp 0.8s ease-out forwards;
+          }
+          
+          .animate-contact-section .animate-content-delay-1 {
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+          }
+          
+          .animate-contact-section .animate-content-delay-2 {
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+          }
+          
+          .primary-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+          }
+          
+          .primary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+          }
+          
+          .primary-button:active {
+            transform: translateY(1px);
+          }
+          
+          .primary-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+          }
+          
+          .primary-button:hover::before {
+            left: 100%;
+          }
+          
+          .secondary-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          
+          .secondary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+          }
+          
+          .secondary-button:active {
+            transform: translateY(1px);
+          }
+        `}</style>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Siap Memulai Proyek Anda?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-content" style={{ fontSize: '48px' }}>Siap Memulai Proyek Anda?</h2>
+          <p className="text-xl mb-10 max-w-2xl mx-auto animate-content-delay-1" style={{ fontSize: '24px' }}>
             Mari kita diskusikan bagaimana kami dapat membantu mewujudkan visi Anda dengan layanan pengembangan ahli kami.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-content-delay-2">
             <button 
-              className="bg-white text-gray-900 px-8 py-4 rounded-lg hover:bg-gray-200 transition-colors text-lg font-medium hover-target"
+              className="bg-white text-gray-900 px-8 py-4 rounded-lg font-medium hover-target primary-button"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
+              style={{ fontSize: '20px' }}
             >
               Hubungi Kami
             </button>
             <button 
-              className="border-2 border-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium hover-target"
+              className="border-2 border-white px-8 py-4 rounded-lg font-medium hover-target secondary-button"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
+              style={{ fontSize: '20px' }}
             >
               Jadwalkan Panggilan
             </button>
