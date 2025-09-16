@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const DemoWebsiteSection = () => {
   // Data untuk demo website - hanya 2 card yang tersisa
@@ -17,8 +17,94 @@ const DemoWebsiteSection = () => {
     }
   ];
 
+  // Ref untuk animasi scroll
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Animasi saat card muncul
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in-up');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cardRefs.current.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      cardRefs.current.forEach((ref) => {
+        if (ref) {
+          observer.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
   return (
     <section className="py-20 px-6 max-w-7xl mx-auto">
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .demo-card {
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+        
+        .demo-card:hover {
+          transform: translateY(-10px) scale(1.02);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .demo-card-img {
+          transition: transform 0.5s ease;
+        }
+        
+        .demo-card:hover .demo-card-img {
+          transform: scale(1.05);
+        }
+        
+        .demo-card-button {
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .demo-card-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: all 0.6s ease;
+        }
+        
+        .demo-card-button:hover::before {
+          left: 100%;
+        }
+      `}</style>
+      
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#101829] dark:text-[#101829] mb-6">
           Jelajahi Demo Website Kami
@@ -32,16 +118,18 @@ const DemoWebsiteSection = () => {
         {demoData.map((demo, index) => (
           <div
             key={demo.id}
+            ref={(el) => { if (el) cardRefs.current[index] = el; }}
             className={`
-              rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl
+              demo-card rounded-2xl overflow-hidden shadow-lg opacity-0
               ${index === 0 ? 'md:translate-y-4' : ''}
             `}
+            style={{ animationDelay: `${index * 0.2}s` }}
           >
-            <div className="relative">
+            <div className="relative overflow-hidden">
               <img 
                 src={demo.image} 
                 alt={demo.title} 
-                className="w-full h-64 object-cover"
+                className="demo-card-img w-full h-64 object-cover"
               />
             </div>
             <div className="bg-[#101829] dark:bg-[#101829] p-6">
@@ -54,7 +142,7 @@ const DemoWebsiteSection = () => {
               <h3 className="text-[30px] font-bold text-white mb-4">
                 {demo.title}
               </h3>
-              <button className="text-[20px] bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-fit">
+              <button className="demo-card-button text-[20px] bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-fit">
                 Detail Website
               </button>
             </div>

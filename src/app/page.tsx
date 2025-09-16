@@ -295,7 +295,7 @@ export default function Home() {
           <div>
             <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6">
               {heroTitleWords.map((word, index) => (
-                <span key={index} className={`animated-word inline-block mr-2 ${word === 'Heejra' ? 'bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent' : ''}`}>
+                <span key={index} className={`animated-word inline-block mr-2 ${word === 'Heejra' ? 'bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent heejra-sway' : ''}`}>
                   {word}
                 </span>
               ))}
