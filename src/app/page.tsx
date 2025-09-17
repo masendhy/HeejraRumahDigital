@@ -704,7 +704,7 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-gray-200 mt-12 pt-8 text-center text-gray-600">
+          <div className="border-t border-[#2b332a] mt-12 pt-8 text-center text-gray-600">
             <p>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
           </div>
         </div>
