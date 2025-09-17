@@ -642,33 +642,44 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-green-800 to-purple-700"></div>
-                <span className="text-2xl font-bold">TechCraft</span>
+                <Image src="/HJR-black.svg" alt="Heejra Logo" width={32} height={32} />
+                <span className="text-2xl font-bold">Heejra</span>
               </div>
-              <p className="text-gray-600">
-                Membangun solusi web dan mobile kustom untuk bisnis di seluruh dunia.
+              <p className="text-gray-600" style={{ fontSize: '20px' }}>
+                Membangun solusi web dan mobile kustom untuk bisnis anda.
               </p>
             </div>
             
             <div>
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start">
-                  <span className="mr-2 mt-1 text-gray-500">
-                    <LocationIcon />
-                  </span>
-                  <span>
-                    Jl. Rinjani Timur III/05 Mojosongo - Solo 57127
-                  </span>
-                </li>
+  <span className="mr-2 mt-1 text-gray-500">
+    <LocationIcon />
+  </span>
+  <a 
+    href="https://maps.app.goo.gl/pteoKpT1e3zkrCyVA"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-gray-900 hover-target"
+    onMouseEnter={() => setIsHovering(true)}
+    onMouseLeave={() => setIsHovering(false)}
+    style={{ fontSize: '20px' }}
+  >
+    Jl. Rinjani Timur III/05 Mojosongo - Solo 57127
+  </a>
+</li>
                 <li className="flex items-start">
                   <span className="mr-2 mt-1 text-gray-500">
                     <PhoneIcon />
                   </span>
                   <a 
-                    href="tel:08562985589" 
+                    href="https://wa.me/628562985589?text=Hi%20Heejra%2C%20saya%20tertarik%20dengan%20layanan%20pembuatan%20website%20dan%20aplikasi%20nya."
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-gray-900 hover-target"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
+                    style={{ fontSize: '20px' }}
                   >
                     08562985589
                   </a>
@@ -678,10 +689,13 @@ export default function Home() {
                     <EmailIcon />
                   </span>
                   <a 
-                    href="mailto:admin@heejra.dev" 
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@heejra.dev"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="hover:text-gray-900 hover-target"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
+                    style={{ fontSize: '20px' }}
                   >
                     admin@heejra.dev
                   </a>
@@ -691,7 +705,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-gray-200 mt-12 pt-8 text-center text-gray-600">
-            <p>© {new Date().getFullYear()} TechCraft Solutions. Hak cipta dilindungi.</p>
+            <p>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
           </div>
         </div>
       </footer>
