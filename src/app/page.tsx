@@ -15,6 +15,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import DemoWebsiteSection from "@/components/DemoWebsiteSection";
 import CraneAnimation from "@/components/CraneAnimation";
 import GirlSVG from "@/components/GirlSVG";
+import HeejraFontLogo from "@/components/HeejraFontLogo";
 
 // Icon Components
 const WebDevelopmentIcon = () => (
@@ -637,7 +638,7 @@ export default function Home() {
       
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-gray-200">
+      <footer className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -704,7 +705,10 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-[#2b332a] mt-12 pt-8 text-center text-gray-600">
+          <div className="mt-8">
+            <HeejraFontLogo />
+          </div>
+          <div className="border-t border-[#2b332a] mt-8 pt-8 text-center text-gray-600">
             <p>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
           </div>
         </div>
