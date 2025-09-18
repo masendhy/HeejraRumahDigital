@@ -90,6 +90,7 @@ const EmailIcon = () => (
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorInnerRef = useRef<HTMLDivElement>(null);
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -228,22 +229,6 @@ export default function Home() {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('animate-contact-section');
-              
-              // Start more visible pulsing animation on the button when section is visible
-              if (pulseButtonRef.current) {
-                // Clear any existing animations
-                gsap.killTweensOf(pulseButtonRef.current);
-                
-                // Create a more visible pulsing effect with color change
-                gsap.to(pulseButtonRef.current, {
-                  scale: 1.05,
-                  backgroundColor: "#374151", // slightly lighter dark color
-                  duration: 0.6,
-                  yoyo: true,
-                  repeat: -1,
-                  ease: "power2.inOut"
-                });
-              }
             }
           });
         },
@@ -572,6 +557,15 @@ export default function Home() {
             }
           }
           
+          @keyframes borderAnimation {
+            0% {
+              background-position: 0% 50%;
+            }
+            100% {
+              background-position: 200% 50%;
+            }
+          }
+          
           .animate-contact-section {
             opacity: 1 !important;
           }
@@ -594,6 +588,26 @@ export default function Home() {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            border: none;
+            background: transparent;
+            background-image: linear-gradient(90deg, #4f46e5, #ec4899, #0073e6, #00e673, #e67300, #4f46e5);
+            background-size: 200% 100%;
+            animation: borderAnimation 3s linear infinite;
+            border-radius: 0.5rem;
+            padding: 4px;
+          }
+          
+          .primary-button-content {
+            border-radius: 0.375rem;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #1f2937;
           }
           
           .primary-button:hover {
@@ -603,21 +617,6 @@ export default function Home() {
           
           .primary-button:active {
             transform: translateY(1px);
-          }
-          
-          .primary-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-          }
-          
-          .primary-button:hover::before {
-            left: 100%;
           }
           
           .secondary-button {
@@ -642,12 +641,19 @@ export default function Home() {
           <div className="animate-content-delay-2">
             <button 
               ref={pulseButtonRef}
-              className="bg-[#1f2937] text-white px-8 py-4 rounded-lg font-medium hover-target primary-button pulse-button shadow-lg"
-              onMouseEnter={() => setIsHovering(true)}
-              onMouseLeave={() => setIsHovering(false)}
-              style={{ fontSize: '20px' }}
+              className="primary-button"
+              onMouseEnter={() => {
+                setIsHovering(true);
+                setIsButtonHovered(true);
+              }}
+              onMouseLeave={() => {
+                setIsHovering(false);
+                setIsButtonHovered(false);
+              }}
             >
-              Hubungi Kami
+              <div className="primary-button-content">
+                Hubungi Kami {isButtonHovered ? '🥳' : '🙂'}
+              </div>
             </button>
           </div>
         </div>
@@ -694,7 +700,7 @@ export default function Home() {
                   <a 
                     href="https://wa.me/628562985589?text=Hi%20Heejra%2C%20saya%20tertarik%20dengan%20layanan%20pembuatan%20website%20dan%20aplikasi%20nya."
                     target="_blank"
-                    rel="noopener noreferrer"
+    rel="noopener noreferrer"
                     className="hover:text-gray-900 hover-target"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
