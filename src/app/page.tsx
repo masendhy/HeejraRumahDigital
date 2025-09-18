@@ -95,6 +95,7 @@ export default function Home() {
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
   const contactSectionRef = useRef<HTMLDivElement>(null);
+  const pulseButtonRef = useRef<HTMLButtonElement>(null);
 
   // Initialize animations when component mounts
   useEffect(() => {
@@ -227,6 +228,22 @@ export default function Home() {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add('animate-contact-section');
+              
+              // Start more visible pulsing animation on the button when section is visible
+              if (pulseButtonRef.current) {
+                // Clear any existing animations
+                gsap.killTweensOf(pulseButtonRef.current);
+                
+                // Create a more visible pulsing effect with color change
+                gsap.to(pulseButtonRef.current, {
+                  scale: 1.05,
+                  backgroundColor: "#374151", // slightly lighter dark color
+                  duration: 0.6,
+                  yoyo: true,
+                  repeat: -1,
+                  ease: "power2.inOut"
+                });
+              }
             }
           });
         },
@@ -540,8 +557,8 @@ export default function Home() {
       <section 
         id="contact" 
         ref={contactSectionRef}
-        className="py-20 px-6 text-white opacity-0 transition-opacity duration-1000"
-        style={{ backgroundColor: 'rgba(16, 24, 41, 0.9)' }}
+        className="py-20 px-6 text-gray-800 opacity-0 transition-opacity duration-1000"
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}
       >
         <style jsx>{`
           @keyframes fadeInUp {
@@ -609,8 +626,8 @@ export default function Home() {
           
           .secondary-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
-            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.05);
           }
           
           .secondary-button:active {
@@ -624,7 +641,8 @@ export default function Home() {
           </p>
           <div className="animate-content-delay-2">
             <button 
-              className="bg-white text-gray-900 px-8 py-4 rounded-lg font-medium hover-target primary-button"
+              ref={pulseButtonRef}
+              className="bg-[#1f2937] text-white px-8 py-4 rounded-lg font-medium hover-target primary-button pulse-button shadow-lg"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
               style={{ fontSize: '20px' }}
@@ -680,7 +698,7 @@ export default function Home() {
                     className="hover:text-gray-900 hover-target"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-                    style={{ fontSize: '20px' }}
+    style={{ fontSize: '20px' }}
                   >
                     08562985589
                   </a>
@@ -705,9 +723,6 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="mt-8">
-            <HeejraFontLogo />
-          </div>
           <div className="border-t border-[#2b332a] mt-8 pt-8 text-center text-gray-600">
             <p>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
           </div>
