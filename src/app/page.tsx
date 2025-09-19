@@ -17,6 +17,7 @@ import CraneAnimation from "@/components/CraneAnimation";
 import GirlSVG from "@/components/GirlSVG";
 import HeejraFontLogo from "@/components/HeejraFontLogo";
 
+
 // Icon Components
 const WebDevelopmentIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1f2937" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -87,10 +88,19 @@ const EmailIcon = () => (
   </svg>
 );
 
+// Chat Icon for Contact Button
+const ChatIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    <circle cx="9" cy="10" r="1"></circle>
+    <circle cx="15" cy="10" r="1"></circle>
+    <circle cx="12" cy="13" r="1"></circle>
+  </svg>
+);
+
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-  const [isButtonHovered, setIsButtonHovered] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorInnerRef = useRef<HTMLDivElement>(null);
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -557,12 +567,31 @@ export default function Home() {
             }
           }
           
-          @keyframes borderAnimation {
+          @keyframes shadowRotation {
             0% {
-              background-position: 0% 50%;
+              box-shadow: 0 0 0 0px rgba(147, 51, 234, 0.5),
+                          0 0 0 4px rgba(147, 51, 234, 0.3),
+                          0 0 0 8px rgba(147, 51, 234, 0.1);
+            }
+            25% {
+              box-shadow: -8px -8px 0 0px rgba(147, 51, 234, 0.5),
+                          -6px -6px 0 4px rgba(147, 51, 234, 0.3),
+                          -4px -4px 0 8px rgba(147, 51, 234, 0.1);
+            }
+            50% {
+              box-shadow: 0 0 0 0px rgba(147, 51, 234, 0.5),
+                          0 0 0 4px rgba(147, 51, 234, 0.3),
+                          0 0 0 8px rgba(147, 51, 234, 0.1);
+            }
+            75% {
+              box-shadow: 8px 8px 0 0px rgba(147, 51, 234, 0.5),
+                          6px 6px 0 4px rgba(147, 51, 234, 0.3),
+                          4px 4px 0 8px rgba(147, 51, 234, 0.1);
             }
             100% {
-              background-position: 200% 50%;
+              box-shadow: 0 0 0 0px rgba(147, 51, 234, 0.5),
+                          0 0 0 4px rgba(147, 51, 234, 0.3),
+                          0 0 0 8px rgba(147, 51, 234, 0.1);
             }
           }
           
@@ -584,53 +613,124 @@ export default function Home() {
             opacity: 0;
           }
           
-          .primary-button {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          .rotating-shadow-button {
             position: relative;
-            overflow: hidden;
-            border: none;
-            background: transparent;
-            background-image: linear-gradient(90deg, #4f46e5, #ec4899, #0073e6, #00e673, #e67300, #4f46e5);
-            background-size: 200% 100%;
-            animation: borderAnimation 3s linear infinite;
+            border: 4px solid;
+            border-image: linear-gradient(90deg, #9333ea, #ec4899) 1;
+            color: #25313d;
+            font-weight: bold;
+            font-size: 20px;
+            padding: 12px 24px;
             border-radius: 0.5rem;
-            padding: 4px;
+            background-color: white;
+            transition: all 0.3s ease;
           }
           
-          .primary-button-content {
-            border-radius: 0.375rem;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 2rem;
-            font-size: 1.25rem;
-            font-weight: 500;
-            color: #1f2937;
-          }
-          
-          .primary-button:hover {
-            transform: translateY(-3px);
+          .rotating-shadow-button:hover {
+            background: linear-gradient(90deg, #9333ea, #ec4899);
+            color: white;
+            transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
           }
           
-          .primary-button:active {
+          .rotating-shadow-button:active {
             transform: translateY(1px);
           }
           
-          .secondary-button {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          .circle-button {
+            position: relative;
+            border: 4px solid;
+            border-image: linear-gradient(90deg, #9333ea, #ec4899) 1;
+            color: #25313d;
+            font-weight: bold;
+            font-size: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: white;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
           }
           
-          .secondary-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            background-color: rgba(0, 0, 0, 0.05);
+          .circle-button:hover {
+            background: linear-gradient(90deg, #9333ea, #ec4899);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
           }
           
-          .secondary-button:active {
+          .circle-button:active {
             transform: translateY(1px);
+          }
+          
+          .glow-on-hover {
+            width: 220px;
+            height: 50px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+          }
+
+          .glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            position: absolute;
+            top: -2px;
+            left:-2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+          }
+
+          .glow-on-hover:active {
+            color: #000
+          }
+
+          .glow-on-hover:active:after {
+            background: transparent;
+          }
+
+          .glow-on-hover:hover:before {
+            opacity: 1;
+          }
+
+          .glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+          }
+
+          @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
           }
         `}</style>
         <div className="max-w-4xl mx-auto text-center">
@@ -641,19 +741,9 @@ export default function Home() {
           <div className="animate-content-delay-2">
             <button 
               ref={pulseButtonRef}
-              className="primary-button"
-              onMouseEnter={() => {
-                setIsHovering(true);
-                setIsButtonHovered(true);
-              }}
-              onMouseLeave={() => {
-                setIsHovering(false);
-                setIsButtonHovered(false);
-              }}
+              className="glow-on-hover"
             >
-              <div className="primary-button-content">
-                Hubungi Kami {isButtonHovered ? '🥳' : '🙂'}
-              </div>
+              Hubungi Kami
             </button>
           </div>
         </div>
