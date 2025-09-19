@@ -698,7 +698,7 @@ export default function Home() {
             width: calc(100% + 4px);
             height: calc(100% + 4px);
             animation: glowing 20s linear infinite;
-            opacity: 1; /* Always visible */
+            opacity: 1;
             transition: opacity .3s ease-in-out;
             border-radius: 10px;
           }
