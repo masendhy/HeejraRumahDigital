@@ -698,7 +698,7 @@ export default function Home() {
             width: calc(100% + 4px);
             height: calc(100% + 4px);
             animation: glowing 20s linear infinite;
-            opacity: 0;
+            opacity: 1; /* Always visible */
             transition: opacity .3s ease-in-out;
             border-radius: 10px;
           }
@@ -709,10 +709,6 @@ export default function Home() {
 
           .glow-on-hover:active:after {
             background: transparent;
-          }
-
-          .glow-on-hover:hover:before {
-            opacity: 1;
           }
 
           .glow-on-hover:after {
