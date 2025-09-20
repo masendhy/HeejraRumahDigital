@@ -108,21 +108,21 @@ const WhyChooseUs = () => {
             <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
               Digital
             </span>{" "}
-            <span className="text-[#101829] dark:text-[#101829] animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
+            <span className="text-[#101829] dark:text-white animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
               yang Tepat dan
             </span>{" "}
-            <span className="text-[#101829] dark:text-[#101829] animate-fade-in opacity-0" style={{ animationDelay: '0.9s' }}>
+            <span className="text-[#101829] dark:text-white animate-fade-in opacity-0" style={{ animationDelay: '0.9s' }}>
               Berdampak
             </span>{" "}
-            <span className="text-[#101829] dark:text-[#101829] animate-fade-in opacity-0" style={{ animationDelay: '1.1s' }}>
+            <span className="text-[#101829] dark:text-white animate-fade-in opacity-0" style={{ animationDelay: '1.1s' }}>
               bagi Bisnis Anda.
             </span>
           </h2>
           {/* Elemen dekoratif shape 3D abstrak */}
           <div className="relative mt-12">
-            <div className="absolute -bottom-6 left-0 w-24 h-24 bg-purple-600 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute -bottom-6 right-0 w-24 h-24 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
+            <div className="absolute -bottom-6 left-0 w-24 h-24 bg-purple-500 rounded-full mix-blend-screen filter blur-xl opacity-80 animate-blob"></div>
+            <div className="absolute -bottom-6 right-0 w-24 h-24 bg-pink-400 rounded-full mix-blend-screen filter blur-xl opacity-80 animate-blob animation-delay-2000"></div>
+            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-purple-300 rounded-full mix-blend-screen filter blur-xl opacity-80 animate-blob animation-delay-4000"></div>
           </div>
         </div>
 

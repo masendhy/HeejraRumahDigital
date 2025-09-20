@@ -552,7 +552,7 @@ export default function Home() {
       <section 
         id="contact" 
         ref={contactSectionRef}
-        className="py-20 px-6 text-gray-800 opacity-0 transition-opacity duration-1000"
+        className="py-20 px-6 text-gray-800 opacity-0 transition-opacity duration-1000 dark:bg-[#101829]/80"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.75)' }}
       >
         <style jsx>{`
@@ -753,7 +753,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Image src="/HJR-black.svg" alt="Heejra Logo" width={32} height={32} />
@@ -764,7 +764,7 @@ export default function Home() {
               </p>
             </div>
             
-            <div>
+            <div className="md:col-start-3 md:col-span-1">
               <ul className="space-y-3 text-gray-600">
                 <li className="flex items-start">
   <span className="mr-2 mt-1 text-gray-500">

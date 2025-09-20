@@ -106,10 +106,10 @@ const DemoWebsiteSection = () => {
       `}</style>
       
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#101829] dark:text-[#101829] mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1e2938] dark:text-white mb-6">
           Jelajahi Demo Website Kami
         </h2>
-        <p className="text-[24px] text-[#414b59] dark:text-[#414b59] max-w-3xl mx-auto">
+        <p className="text-[24px] text-[#1e2938] dark:text-gray-300 max-w-3xl mx-auto">
           Rasakan bagaimana solusi digital kami dapat membantu mengoptimalkan bisnis Anda.
         </p>
       </div>
