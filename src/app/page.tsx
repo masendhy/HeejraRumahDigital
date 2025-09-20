@@ -738,6 +738,9 @@ export default function Home() {
             <button 
               ref={pulseButtonRef}
               className="glow-on-hover"
+              onClick={() => {
+                window.open('https://wa.me/628562985589?text=Hi%20Heejra%2C%20boleh%20dong%20info%20layanan%20pembuatan%20website%20dan%20aplikasinya%20!', '_blank');
+              }}
             >
               Hubungi Kami
             </button>
