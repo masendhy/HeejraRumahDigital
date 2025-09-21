@@ -18,6 +18,33 @@ import GirlSVG from "@/components/GirlSVG";
 import HeejraFontLogo from "@/components/HeejraFontLogo";
 
 
+// Custom hook to detect theme
+const useTheme = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'dark' : 'light');
+    };
+
+    // Initial check
+    updateTheme();
+
+    // Listen for changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+};
+
+
 // Icon Components
 const WebDevelopmentIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1f2937" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -107,6 +134,7 @@ export default function Home() {
   const blobRefs = useRef<(HTMLDivElement | null)[]>([]);
   const contactSectionRef = useRef<HTMLDivElement>(null);
   const pulseButtonRef = useRef<HTMLButtonElement>(null);
+  const theme = useTheme(); // Use the custom theme hook
 
   // Initialize animations when component mounts
   useEffect(() => {
@@ -412,10 +440,16 @@ export default function Home() {
         </div>
         
         <div className="text-center mb-16 relative z-10">
-          <h2 className="services-title text-3xl md:text-4xl font-bold mb-4 text-gray-800">
+          <h2 
+            className="services-title text-3xl md:text-4xl font-bold mb-4"
+            style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}
+          >
             Solusi Web&App Kustom untuk Bisnis Modern
           </h2>
-          <p className="text-2xl text-gray-600 max-w-2xl mx-auto">
+          <p 
+            className="text-2xl max-w-2xl mx-auto"
+            style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}
+          >
             Kami menyediakan solusi pengembangan end-to-end yang disesuaikan dengan kebutuhan bisnis Anda
           </p>
         </div>

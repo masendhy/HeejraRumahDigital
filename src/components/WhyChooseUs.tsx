@@ -1,4 +1,33 @@
+"use client";
+
 import React from 'react';
+import { useState, useEffect } from 'react';
+
+// Custom hook untuk mendeteksi tema
+const useTheme = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'dark' : 'light');
+    };
+
+    // Cek awal
+    updateTheme();
+
+    // Listen perubahan
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+};
 
 
 // Interface untuk data why_choose_us
@@ -14,6 +43,9 @@ interface WhyChooseUsData {
 }
 
 const WhyChooseUs = () => {
+  // Gunakan custom hook untuk mendeteksi tema
+  const theme = useTheme();
+  
   // Data why choose us
   const data: WhyChooseUsData = {
     heading: "Mengapa Memilih Kami",
@@ -98,7 +130,7 @@ const WhyChooseUs = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Kolom Kiri - Heading */}
         <div>
-          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold mb-8 leading-tight">
             <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent animate-fade-in opacity-0" style={{ animationDelay: '0.1s' }}>
               Menciptakan
             </span>{" "}
@@ -108,21 +140,30 @@ const WhyChooseUs = () => {
             <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent animate-fade-in opacity-0" style={{ animationDelay: '0.5s' }}>
               Digital
             </span>{" "}
-            <span className="text-[#101829] dark:text-white animate-fade-in opacity-0" style={{ animationDelay: '0.7s' }}>
+            <span className="animate-fade-in opacity-0" style={{ 
+              animationDelay: '0.7s',
+              color: theme === 'dark' ? '#ffffff' : '#101829'
+            }}>
               yang Tepat dan
             </span>{" "}
-            <span className="text-[#101829] dark:text-white animate-fade-in opacity-0" style={{ animationDelay: '0.9s' }}>
+            <span className="animate-fade-in opacity-0" style={{ 
+              animationDelay: '0.9s',
+              color: theme === 'dark' ? '#ffffff' : '#101829'
+            }}>
               Berdampak
             </span>{" "}
-            <span className="text-[#101829] dark:text-white animate-fade-in opacity-0" style={{ animationDelay: '1.1s' }}>
+            <span className="animate-fade-in opacity-0" style={{ 
+              animationDelay: '1.1s',
+              color: theme === 'dark' ? '#ffffff' : '#101829'
+            }}>
               bagi Bisnis Anda.
             </span>
           </h2>
           {/* Elemen dekoratif shape 3D abstrak */}
           <div className="relative mt-12">
-            <div className="absolute -bottom-6 left-0 w-24 h-24 bg-purple-500 rounded-full mix-blend-screen filter blur-xl opacity-80 animate-blob"></div>
-            <div className="absolute -bottom-6 right-0 w-24 h-24 bg-pink-400 rounded-full mix-blend-screen filter blur-xl opacity-80 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-24 h-24 bg-purple-300 rounded-full mix-blend-screen filter blur-xl opacity-80 animate-blob animation-delay-4000"></div>
+            <div className={`absolute -bottom-6 left-0 w-24 h-24 rounded-full filter blur-xl opacity-80 animate-blob ${theme === 'dark' ? 'bg-purple-500' : 'bg-purple-400'}`}></div>
+            <div className={`absolute -bottom-6 right-0 w-24 h-24 rounded-full filter blur-xl opacity-80 animate-blob animation-delay-2000 ${theme === 'dark' ? 'bg-pink-400' : 'bg-pink-300'}`}></div>
+            <div className={`absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full filter blur-xl opacity-80 animate-blob animation-delay-4000 ${theme === 'dark' ? 'bg-purple-300' : 'bg-purple-200'}`}></div>
           </div>
         </div>
 
