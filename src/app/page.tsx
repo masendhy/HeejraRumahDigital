@@ -354,12 +354,12 @@ export default function Home() {
           <div>
             <h1 className="hero-title text-4xl md:text-6xl font-bold mb-6">
               {heroTitleWords.map((word, index) => (
-                <span key={index} className={`animated-word inline-block mr-2 ${word === 'Heejra' ? 'bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent heejra-sway' : ''}`}>
+                <span key={index} className={`animated-word inline-block mr-2 ${word === 'Heejra' ? 'bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent heejra-sway' : 'text-[#101829] dark:text-[#ffffff]'}`}>
                   {word}
                 </span>
               ))}
             </h1>
-            <p className="hero-subtitle text-2xl text-gray-600 mb-10">
+            <p className="hero-subtitle text-2xl mb-10">
               Di <span className="font-bold text-3xl bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Heejra</span>,kami bersemangat dalam mengubah ide menjadi pengalaman digital yang bermakna. Sebagai agensi digital yang visioner, kami spesialis dalam menyediakan solusi kreatif, strategi inovatif, dan desain yang berpusat pada pengguna untuk membantu merek berkembang di lanskap digital yang terus berubah.
             </p>
           </div>

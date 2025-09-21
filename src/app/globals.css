@@ -70,6 +70,24 @@ body {
   transform: scale(0.8);
 }
 
+/* Hero subtitle colors */
+.hero-subtitle {
+  color: #101829 !important;
+}
+
+.dark .hero-subtitle {
+  color: #ffffff !important;
+}
+
+/* Hero title colors */
+.animated-word:not(.heejra-sway) {
+  color: #101829 !important;
+}
+
+.dark .animated-word:not(.heejra-sway) {
+  color: #ffffff !important;
+}
+
 /* Animation for interactive elements */
 .hover-scale {
   transition: transform 0.3s ease;
