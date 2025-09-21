@@ -764,8 +764,8 @@ export default function Home() {
           }
         `}</style>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-content" style={{ fontSize: '48px' }}>Siap Memulai Proyek Anda?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto animate-content-delay-1" style={{ fontSize: '24px' }}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-content" style={{ fontSize: '48px', color: '#101829' }}>Siap Memulai Proyek Anda?</h2>
+          <p className="text-xl mb-10 max-w-2xl mx-auto animate-content-delay-1" style={{ fontSize: '24px', color: '#101829' }}>
             Mari kita diskusikan bagaimana kami dapat membantu mewujudkan visi Anda dengan layanan pengembangan ahli kami.
           </p>
           <div className="animate-content-delay-2">
@@ -791,59 +791,59 @@ export default function Home() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Image src="/HJR-black.svg" alt="Heejra Logo" width={32} height={32} />
-                <span className="text-2xl font-bold">Heejra</span>
+                <span className="text-2xl font-bold" style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}>Heejra</span>
               </div>
-              <p className="text-gray-600" style={{ fontSize: '20px' }}>
+              <p style={{ fontSize: '20px', color: theme === 'dark' ? '#ffffff' : '#101829' }}>
                 Membangun solusi web dan mobile kustom untuk bisnis anda.
               </p>
             </div>
             
             <div className="md:col-start-3 md:col-span-1">
-              <ul className="space-y-3 text-gray-600">
+              <ul className="space-y-3">
                 <li className="flex items-start">
-  <span className="mr-2 mt-1 text-gray-500">
+  <span className="mr-2 mt-1" style={{ color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>
     <LocationIcon />
   </span>
   <a 
     href="https://maps.app.goo.gl/pteoKpT1e3zkrCyVA"
     target="_blank"
     rel="noopener noreferrer"
-    className="hover:text-gray-900 hover-target"
+    className="hover-target"
     onMouseEnter={() => setIsHovering(true)}
     onMouseLeave={() => setIsHovering(false)}
-    style={{ fontSize: '20px' }}
+    style={{ fontSize: '20px', color: theme === 'dark' ? '#ffffff' : '#101829' }}
   >
     Jl. Rinjani Timur III/05 Mojosongo - Solo 57127
   </a>
 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 mt-1 text-gray-500">
+                  <span className="mr-2 mt-1" style={{ color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>
                     <PhoneIcon />
                   </span>
                   <a 
                     href="https://wa.me/628562985589?text=Hi%20Heejra%2C%20saya%20tertarik%20dengan%20layanan%20pembuatan%20website%20dan%20aplikasi%20nya."
                     target="_blank"
     rel="noopener noreferrer"
-                    className="hover:text-gray-900 hover-target"
+                    className="hover-target"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-    style={{ fontSize: '20px' }}
+    style={{ fontSize: '20px', color: theme === 'dark' ? '#ffffff' : '#101829' }}
                   >
                     08562985589
                   </a>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 mt-1 text-gray-500">
+                  <span className="mr-2 mt-1" style={{ color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>
                     <EmailIcon />
                   </span>
                   <a 
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@heejra.dev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-gray-900 hover-target"
+                    className="hover-target"
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-                    style={{ fontSize: '20px' }}
+                    style={{ fontSize: '20px', color: theme === 'dark' ? '#ffffff' : '#101829' }}
                   >
                     admin@heejra.dev
                   </a>
@@ -852,8 +852,8 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-[#2b332a] mt-8 pt-8 text-center text-gray-600">
-            <p>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
+          <div className="border-t mt-8 pt-8 text-center">
+            <p style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
           </div>
         </div>
       </footer>
