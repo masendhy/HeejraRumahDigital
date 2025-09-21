@@ -1,6 +1,5 @@
-"use client";
-
 import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 // Custom hook untuk mendeteksi tema
 const useTheme = () => {
@@ -36,12 +35,14 @@ const DemoWebsiteSection = () => {
   const demoData = [
     {
       id: 1,
+      slug: 'demo-website-showroom',
       image: '/showroom-display.jpg',
       category: 'Branding,Website,App',
       title: 'Demo Website Showroom',
     },
     {
       id: 2,
+      slug: 'demo-startup-landing-page',
       image: '/travel.jpg',
       category: 'App,Marketing',
       title: 'Demo Startup Landing Page',
@@ -173,9 +174,12 @@ const DemoWebsiteSection = () => {
               <h3 className="text-[30px] font-bold text-white mb-4">
                 {demo.title}
               </h3>
-              <button className="demo-card-button text-[20px] bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-fit">
+              <Link 
+                href={`/website/${demo.slug}`}
+                className="demo-card-button text-[20px] bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-fit inline-block"
+              >
                 Detail Website
-              </button>
+              </Link>
             </div>
           </div>
         ))}
