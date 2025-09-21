@@ -95,21 +95,21 @@ const UIUXDesignIcon = () => (
 );
 
 // Contact Icons
-const LocationIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const LocationIcon = ({ color }: { color: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
     <circle cx="12" cy="10" r="3"></circle>
   </svg>
 );
 
-const PhoneIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const PhoneIcon = ({ color }: { color: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
   </svg>
 );
 
-const EmailIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+const EmailIcon = ({ color }: { color: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
     <polyline points="22,6 12,13 2,6"></polyline>
   </svg>
@@ -801,8 +801,8 @@ export default function Home() {
             <div className="md:col-start-3 md:col-span-1">
               <ul className="space-y-3">
                 <li className="flex items-start">
-  <span className="mr-2 mt-1" style={{ color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>
-    <LocationIcon />
+  <span className="mr-2 mt-1">
+    <LocationIcon color={theme === 'dark' ? '#ffffff' : '#101829'} />
   </span>
   <a 
     href="https://maps.app.goo.gl/pteoKpT1e3zkrCyVA"
@@ -817,8 +817,8 @@ export default function Home() {
   </a>
 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 mt-1" style={{ color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>
-                    <PhoneIcon />
+                  <span className="mr-2 mt-1">
+                    <PhoneIcon color={theme === 'dark' ? '#ffffff' : '#101829'} />
                   </span>
                   <a 
                     href="https://wa.me/628562985589?text=Hi%20Heejra%2C%20saya%20tertarik%20dengan%20layanan%20pembuatan%20website%20dan%20aplikasi%20nya."
@@ -833,8 +833,8 @@ export default function Home() {
                   </a>
                 </li>
                 <li className="flex items-start">
-                  <span className="mr-2 mt-1" style={{ color: theme === 'dark' ? '#9ca3af' : '#6b7280' }}>
-                    <EmailIcon />
+                  <span className="mr-2 mt-1">
+                    <EmailIcon color={theme === 'dark' ? '#ffffff' : '#101829'} />
                   </span>
                   <a 
                     href="https://mail.google.com/mail/?view=cm&fs=1&to=admin@heejra.dev"
