@@ -1,6 +1,37 @@
-import React, { useEffect, useRef } from 'react';
+"use client";
+
+import React, { useEffect, useRef, useState } from 'react';
+
+// Custom hook untuk mendeteksi tema
+const useTheme = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'dark' : 'light');
+    };
+
+    // Cek awal
+    updateTheme();
+
+    // Listen perubahan
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+};
 
 const DemoWebsiteSection = () => {
+  // Gunakan custom hook untuk mendeteksi tema
+  const theme = useTheme();
+  
   // Data untuk demo website - hanya 2 card yang tersisa
   const demoData = [
     {
@@ -106,10 +137,10 @@ const DemoWebsiteSection = () => {
       `}</style>
       
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1e2938] dark:text-white mb-6">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6" style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}>
           Jelajahi Demo Website Kami
         </h2>
-        <p className="text-[24px] text-[#1e2938] dark:text-gray-300 max-w-3xl mx-auto">
+        <p className="text-[24px] max-w-3xl mx-auto" style={{ color: theme === 'dark' ? '#d1d5db' : '#101829' }}>
           Rasakan bagaimana solusi digital kami dapat membantu mengoptimalkan bisnis Anda.
         </p>
       </div>
