@@ -67,6 +67,18 @@ export default function WebsiteDetail() {
     setLoading(false);
   }, [slug]);
 
+  // Force light mode styling by using only light mode colors
+  useEffect(() => {
+    // Add a class to force light mode styles
+    document.documentElement.classList.add('force-light-mode');
+    
+    // Cleanup function
+    return () => {
+      // Remove the force-light-mode class when component unmounts
+      document.documentElement.classList.remove('force-light-mode');
+    };
+  }, []);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -79,8 +91,8 @@ export default function WebsiteDetail() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Website Tidak Ditemukan</h1>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Maaf, website yang Anda cari tidak tersedia.</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Website Tidak Ditemukan</h1>
+          <p className="text-gray-600 mb-6">Maaf, website yang Anda cari tidak tersedia.</p>
           <Link 
             href="/#demo" 
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300"
@@ -94,10 +106,50 @@ export default function WebsiteDetail() {
 
   return (
     <div className="min-h-screen py-20 px-6">
+      <style jsx global>{`
+        /* Force light mode colors for this page */
+        .force-light-mode {
+          --text-primary: #101829;
+          --text-secondary: #6b7280;
+          --bg-light: #f3f4f6;
+        }
+        
+        /* Override dark mode styles for this page */
+        .force-light-mode .text-gray-900,
+        .force-light-mode .dark\:text-white {
+          color: #101829 !important;
+        }
+        
+        .force-light-mode .text-gray-700,
+        .force-light-mode .dark\:text-gray-300 {
+          color: #6b7280 !important;
+        }
+        
+        .force-light-mode .text-gray-600,
+        .force-light-mode .dark\:text-gray-400 {
+          color: #6b7280 !important;
+        }
+        
+        .force-light-mode .bg-gray-100,
+        .force-light-mode .dark\:bg-gray-800 {
+          background-color: #f3f4f6 !important;
+        }
+        
+        .force-light-mode .text-purple-600,
+        .force-light-mode .dark\:text-purple-400 {
+          color: #9333ea !important;
+        }
+        
+        .force-light-mode .hover\:text-purple-800:hover,
+        .force-light-mode .dark\:hover\:text-purple-300:hover {
+          color: #7e22ce !important;
+        }
+      `}</style>
+      
       <div className="max-w-7xl mx-auto">
         <Link 
           href="/#demo" 
-          className="inline-flex items-center text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 mb-8 transition-colors duration-300"
+          className="inline-flex items-center text-purple-600 hover:text-purple-800 mb-8 transition-colors duration-300"
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
@@ -114,26 +166,26 @@ export default function WebsiteDetail() {
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               {website.title}
             </h1>
             
-            <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">
+            <p className="text-xl text-gray-700 mb-8">
               {website.description}
             </p>
             
             <div className="grid grid-cols-2 gap-6 mb-8">
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">Klien</h3>
-                <p className="text-gray-600 dark:text-gray-400">{website.client}</p>
+                <h3 className="font-bold text-gray-900 mb-2">Klien</h3>
+                <p className="text-gray-600">{website.client}</p>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">Industri</h3>
-                <p className="text-gray-600 dark:text-gray-400">{website.industry}</p>
+                <h3 className="font-bold text-gray-900 mb-2">Industri</h3>
+                <p className="text-gray-600">{website.industry}</p>
               </div>
               <div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-2">Tahun</h3>
-                <p className="text-gray-600 dark:text-gray-400">{website.year}</p>
+                <h3 className="font-bold text-gray-900 mb-2">Tahun</h3>
+                <p className="text-gray-600">{website.year}</p>
               </div>
             </div>
           </div>
@@ -153,21 +205,21 @@ export default function WebsiteDetail() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Fitur Utama</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Fitur Utama</h2>
             <ul className="space-y-4">
               {website.features.map((feature: string, index: number) => (
                 <li key={index} className="flex items-start">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-gray-700 dark:text-gray-300">{feature}</span>
+                  <span className="text-gray-700">{feature}</span>
                 </li>
               ))}
             </ul>
           </div>
           
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Teknologi</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Teknologi</h2>
             <div className="flex flex-wrap gap-3 mb-8">
               {website.technologies.map((tech: string, index: number) => (
                 <span 
@@ -179,9 +231,9 @@ export default function WebsiteDetail() {
               ))}
             </div>
             
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Tertarik dengan proyek serupa?</h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">
+            <div className="bg-gray-100 rounded-2xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">Tertarik dengan proyek serupa?</h3>
+              <p className="text-gray-700 mb-6">
                 Kami siap membantu Anda mewujudkan solusi digital yang tepat untuk bisnis Anda.
               </p>
               <button 
