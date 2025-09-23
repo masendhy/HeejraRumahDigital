@@ -155,12 +155,12 @@ export default function WebsiteDetail() {
 
         .demo-button-link {
           color: white;
-          font-family: Helvetica, sans-serif;
+          font-family: 'Jost', Helvetica, sans-serif;
           font-weight: bold;
           font-size: 24px;
           text-align: center;
           text-decoration: none;
-          background-color: #FFA12B;
+          background: linear-gradient(to right, #9333ea, #ec4899); /* Gradient ungu ke pink */
           display: block;
           position: relative;
           padding: 20px 40px;
@@ -169,9 +169,9 @@ export default function WebsiteDetail() {
           text-shadow: 0px 1px 0px #000;
           filter: dropshadow(color=#000, offx=0px, offy=1px);
           
-          -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
-          -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
-          box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+          -webkit-box-shadow: inset 0 1px 0 #f0d6f5, 0 10px 0 #7e22ce; /* Shadow disesuaikan */
+          -moz-box-shadow: inset 0 1px 0 #f0d6f5, 0 10px 0 #7e22ce;
+          box-shadow: inset 0 1px 0 #f0d6f5, 0 10px 0 #7e22ce;
           
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
@@ -190,11 +190,11 @@ export default function WebsiteDetail() {
 
         .demo-button-link:active {
           top: 10px;
-          background-color: #F78900;
+          background: linear-gradient(to right, #7e22ce, #db2777); /* Gradient lebih gelap saat ditekan */
           
-          -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
-          -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
-          box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+          -webkit-box-shadow: inset 0 1px 0 #f0d6f5, inset 0 -3px 0 #7e22ce;
+          -moz-box-shadow: inset 0 1px 0 #f0d6f5, inset 0 -3px 0 #7e22ce;
+          box-shadow: inset 0 1px 0 #f0d6f5, inset 0 -3px 0 #7e22ce;
         }
 
         .demo-button-wrapper:after {
@@ -206,7 +206,7 @@ export default function WebsiteDetail() {
           bottom: -15px;
           left: -4px;
           z-index: -1;
-          background-color: #2B1800;
+          background-color: #581c87; /* Shadow bawah disesuaikan */
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
           border-radius: 5px;
@@ -283,10 +283,10 @@ export default function WebsiteDetail() {
       <div className="max-w-7xl mx-auto">
         <Link 
           href="/#demo" 
-          className="inline-flex items-center text-purple-600 hover:text-purple-800 mb-8 transition-colors duration-300"
+          className="inline-flex items-center text-purple-600 hover:text-purple-800 mb-8 transition-colors duration-300 font-bold"
           style={{ fontSize: '20px' }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="#9333ea">
             <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
           </svg>
           Kembali ke Demo
@@ -329,10 +329,15 @@ export default function WebsiteDetail() {
             <ul className="space-y-4">
               {website.features.map((feature: string, index: number) => (
                 <li key={index} className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-purple-600 mr-3 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-gray-700">{feature}</span>
+                  <span 
+                    className="text-gray-700"
+                    style={{ fontSize: '20px' }}
+                  >
+                    {feature}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -345,6 +350,7 @@ export default function WebsiteDetail() {
                 <span 
                   key={index} 
                   className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full text-sm font-medium"
+                  style={{ fontSize: '18px' }}
                 >
                   {tech}
                 </span>
