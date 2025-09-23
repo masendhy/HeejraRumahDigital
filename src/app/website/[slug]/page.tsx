@@ -96,6 +96,7 @@ export default function WebsiteDetail() {
           <Link 
             href="/#demo" 
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300"
+            style={{ fontSize: '20px' }}
           >
             Kembali ke Demo
           </Link>
@@ -144,14 +145,148 @@ export default function WebsiteDetail() {
         .force-light-mode .dark\:hover\:text-purple-300:hover {
           color: #7e22ce !important;
         }
+        
+        /* Custom button styles */
+        .demo-button-wrapper {
+          position: relative;
+          display: inline-block;
+          margin: 20px;
+        }
+
+        .demo-button-link {
+          color: white;
+          font-family: Helvetica, sans-serif;
+          font-weight: bold;
+          font-size: 24px;
+          text-align: center;
+          text-decoration: none;
+          background-color: #FFA12B;
+          display: block;
+          position: relative;
+          padding: 20px 40px;
+          
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          text-shadow: 0px 1px 0px #000;
+          filter: dropshadow(color=#000, offx=0px, offy=1px);
+          
+          -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+          -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+          box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #915100;
+          
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          
+          /* Responsive styling for mobile */
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+        }
+        
+        .demo-button-admin {
+          padding: 20px 60px; /* Lebih panjang di sisi kanan-kiri */
+        }
+
+        .demo-button-link:active {
+          top: 10px;
+          background-color: #F78900;
+          
+          -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+          -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+          box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #915100;
+        }
+
+        .demo-button-wrapper:after {
+          content: "";
+          height: 100%;
+          width: 100%;
+          padding: 4px;
+          position: absolute;
+          bottom: -15px;
+          left: -4px;
+          z-index: -1;
+          background-color: #2B1800;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+        }
+        
+        .justify-self-start {
+          justify-self: start;
+        }
+        
+        .justify-self-end {
+          justify-self: end;
+        }
+        
+        /* Desktop styles for better spacing */
+        @media (min-width: 1024px) {
+          .grid.grid-cols-2 {
+            gap: 100px; /* Jarak besar antara tombol di desktop */
+          }
+          
+          .demo-button-wrapper {
+            margin: 20px 10px; /* Margin tambahan untuk tombol */
+          }
+        }
+        
+        /* Laptop styles */
+        @media (min-width: 769px) and (max-width: 1023px) {
+          .grid.grid-cols-2 {
+            gap: 60px; /* Jarak sedang antara tombol di laptop */
+          }
+          
+          .demo-button-wrapper {
+            margin: 20px 10px;
+          }
+        }
+        
+        /* Tablet styles */
+        @media (max-width: 768px) {
+          .demo-button-link {
+            font-size: 18px;
+            padding: 15px 25px;
+          }
+          
+          .demo-button-admin {
+            padding: 15px 35px;
+          }
+          
+          .demo-button-wrapper {
+            margin: 10px 5px;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .demo-button-link {
+            font-size: 16px;
+            padding: 12px 20px;
+          }
+          
+          .demo-button-admin {
+            padding: 12px 30px;
+          }
+          
+          .grid.grid-cols-2 {
+            grid-template-columns: 1fr;
+            gap: 10px;
+          }
+          
+          .justify-self-start,
+          .justify-self-end {
+            justify-self: center;
+          }
+        }
       `}</style>
       
       <div className="max-w-7xl mx-auto">
         <Link 
           href="/#demo" 
           className="inline-flex items-center text-purple-600 hover:text-purple-800 mb-8 transition-colors duration-300"
+          style={{ fontSize: '20px' }}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
           </svg>
           Kembali ke Demo
@@ -173,21 +308,6 @@ export default function WebsiteDetail() {
             <p className="text-xl text-gray-700 mb-8">
               {website.description}
             </p>
-            
-            <div className="grid grid-cols-2 gap-6 mb-8">
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Klien</h3>
-                <p className="text-gray-600">{website.client}</p>
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Industri</h3>
-                <p className="text-gray-600">{website.industry}</p>
-              </div>
-              <div>
-                <h3 className="font-bold text-gray-900 mb-2">Tahun</h3>
-                <p className="text-gray-600">{website.year}</p>
-              </div>
-            </div>
           </div>
           
           <div>
@@ -231,18 +351,35 @@ export default function WebsiteDetail() {
               ))}
             </div>
             
-            <div className="bg-gray-100 rounded-2xl p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Tertarik dengan proyek serupa?</h3>
-              <p className="text-gray-700 mb-6">
-                Kami siap membantu Anda mewujudkan solusi digital yang tepat untuk bisnis Anda.
-              </p>
-              <button 
-                onClick={() => window.open('https://wa.me/628562985589?text=Hi%20Heejra%2C%20saya%20tertarik%20dengan%20layanan%20pembuatan%20website%20dan%20aplikasi%20nya.', '_blank')}
-                className="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300 w-full"
-              >
-                Hubungi Kami
-              </button>
+            <div className="grid grid-cols-2 gap-8 mb-8">
+              <div className="demo-button-wrapper justify-self-start">
+                <a 
+                  href="/admin-demo" 
+                  target="_blank"
+                  className="demo-button-link demo-button-admin"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open('/admin-demo', '_blank');
+                  }}
+                >
+                  Demo Admin Page
+                </a>
+              </div>
+              <div className="demo-button-wrapper justify-self-end">
+                <a 
+                  href="/website-demo" 
+                  target="_blank"
+                  className="demo-button-link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open('/website-demo', '_blank');
+                  }}
+                >
+                  Demo Website
+                </a>
+              </div>
             </div>
+            
           </div>
         </div>
       </div>
