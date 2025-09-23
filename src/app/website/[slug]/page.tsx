@@ -154,13 +154,13 @@ export default function WebsiteDetail() {
         }
 
         .demo-button-link {
-          color: white;
+          color: white; /* Warna teks putih untuk kontras dengan background gelap */
           font-family: 'Jost', Helvetica, sans-serif;
           font-weight: bold;
           font-size: 24px;
           text-align: center;
           text-decoration: none;
-          background: linear-gradient(to right, #9333ea, #ec4899); /* Gradient ungu ke pink */
+          background: #568C69; /* Warna #568C69 */
           display: block;
           position: relative;
           padding: 20px 40px;
@@ -169,9 +169,9 @@ export default function WebsiteDetail() {
           text-shadow: 0px 1px 0px #000;
           filter: dropshadow(color=#000, offx=0px, offy=1px);
           
-          -webkit-box-shadow: inset 0 1px 0 #f0d6f5, 0 10px 0 #7e22ce; /* Shadow disesuaikan */
-          -moz-box-shadow: inset 0 1px 0 #f0d6f5, 0 10px 0 #7e22ce;
-          box-shadow: inset 0 1px 0 #f0d6f5, 0 10px 0 #7e22ce;
+          -webkit-box-shadow: inset 0 1px 0 #8cb099, 0 10px 0 #3d634a; /* Shadow disesuaikan */
+          -moz-box-shadow: inset 0 1px 0 #8cb099, 0 10px 0 #3d634a;
+          box-shadow: inset 0 1px 0 #8cb099, 0 10px 0 #3d634a;
           
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
@@ -190,11 +190,11 @@ export default function WebsiteDetail() {
 
         .demo-button-link:active {
           top: 10px;
-          background: linear-gradient(to right, #7e22ce, #db2777); /* Gradient lebih gelap saat ditekan */
+          background: #457055; /* Warna sedikit lebih gelap saat ditekan */
           
-          -webkit-box-shadow: inset 0 1px 0 #f0d6f5, inset 0 -3px 0 #7e22ce;
-          -moz-box-shadow: inset 0 1px 0 #f0d6f5, inset 0 -3px 0 #7e22ce;
-          box-shadow: inset 0 1px 0 #f0d6f5, inset 0 -3px 0 #7e22ce;
+          -webkit-box-shadow: inset 0 1px 0 #8cb099, inset 0 -3px 0 #3d634a;
+          -moz-box-shadow: inset 0 1px 0 #8cb099, inset 0 -3px 0 #3d634a;
+          box-shadow: inset 0 1px 0 #8cb099, inset 0 -3px 0 #3d634a;
         }
 
         .demo-button-wrapper:after {
@@ -206,7 +206,7 @@ export default function WebsiteDetail() {
           bottom: -15px;
           left: -4px;
           z-index: -1;
-          background-color: #581c87; /* Shadow bawah disesuaikan */
+          background-color: #3d634a; /* Shadow bawah disesuaikan */
           -webkit-border-radius: 5px;
           -moz-border-radius: 5px;
           border-radius: 5px;
