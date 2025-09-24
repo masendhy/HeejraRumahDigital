@@ -52,7 +52,7 @@ const WhyChooseUs = () => {
     items: [
       {
         id: "01",
-        title: "Layanan yang Komprehensif",
+        title: "Strategi yang Tepat",
         description: "Setiap bisnis punya tujuan, dan kami hadir untuk membantu Anda menyampaikannya melalui strategi digital yang efektif dan menyeluruh."
       },
       {
@@ -176,11 +176,11 @@ const WhyChooseUs = () => {
               style={{ animationDelay: `${0.1 + index * 0.1}s` }}
             >
               {/* Nomor urut dengan warna pink/ungu */}
-              <div className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
+              <div className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent mb-4">
                 {item.id}
               </div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">{item.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-[24px] leading-relaxed">{item.description}</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 leading-snug">{item.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-base leading-7">{item.description}</p>
             </div>
           ))}
         </div>
