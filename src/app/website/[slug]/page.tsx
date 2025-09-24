@@ -5,6 +5,32 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Custom hook to detect theme
+const useTheme = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    const updateTheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setTheme(isDark ? 'dark' : 'light');
+    };
+
+    // Initial check
+    updateTheme();
+
+    // Listen for changes
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return theme;
+};
+
 // Data contoh untuk website detail
 const websiteData = [
   {
@@ -54,6 +80,7 @@ export default function WebsiteDetail() {
   const { slug } = params;
   const [website, setWebsite] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const theme = useTheme(); // Use the custom theme hook
 
   useEffect(() => {
     // Simulasi fetching data berdasarkan slug
@@ -301,11 +328,11 @@ export default function WebsiteDetail() {
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}>
               {website.title}
             </h1>
             
-            <p className="text-xl text-gray-700 mb-8">
+            <p className="text-xl mb-8" style={{ color: theme === 'dark' ? '#ffffff' : '#6c7380' }}>
               {website.description}
             </p>
           </div>

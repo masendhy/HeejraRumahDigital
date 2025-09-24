@@ -164,14 +164,14 @@ const DemoWebsiteSection = () => {
                 className="demo-card-img w-full h-64 object-cover"
               />
             </div>
-            <div className="bg-[#101829] dark:bg-[#101829] p-6">
+            <div style={{ backgroundColor: theme === 'dark' ? '#101829' : '#ffffff' }} className="p-6">
               <div className="flex items-center mb-3">
                 <div className="h-0.5 w-20 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full"></div>
                 <div className="text-[24px] font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent ml-3">
                   {demo.category}
                 </div>
               </div>
-              <h3 className="text-[30px] font-bold text-white mb-4">
+              <h3 className="text-[30px] font-bold mb-4" style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}>
                 {demo.title}
               </h3>
               <Link 
