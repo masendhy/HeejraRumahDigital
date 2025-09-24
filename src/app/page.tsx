@@ -128,6 +128,7 @@ const ChatIcon = () => (
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorInnerRef = useRef<HTMLDivElement>(null);
   const serviceCardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -136,8 +137,10 @@ export default function Home() {
   const pulseButtonRef = useRef<HTMLButtonElement>(null);
   const theme = useTheme(); // Use the custom theme hook
 
-  // Initialize animations when component mounts
+  // Set isClient to true when component mounts
   useEffect(() => {
+    setIsClient(true);
+    
     // Animate hero section
     animateHeroSection();
     
@@ -332,9 +335,6 @@ export default function Home() {
   // Split the hero title into words for animation
   const heroTitleWords = ["Selamat", "Datang", "di", "Heejra"];
 
-  // Deteksi perangkat mobile
-  const isMobile = typeof window !== 'undefined' ? /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) : false;
-
   // Colors for the asterisks
   const starColors = [
     '#FF6B6B', // Red
@@ -351,8 +351,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Custom Cursor - hanya ditampilkan di desktop */}
-      {!isMobile && (
+      {/* Custom Cursor - hanya ditampilkan di desktop dan setelah client mount */}
+      {isClient && !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) && (
         <>
           <div
             ref={cursorRef}
@@ -439,7 +439,7 @@ export default function Home() {
           </div>
         </div>
         
-        <div className="text-center mb-16 relative z-10">
+        <div className="text-center mb-8 md:mb-16 relative z-10">
           <h2 
             className="services-title text-3xl md:text-4xl font-bold mb-4"
             style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}
@@ -463,14 +463,14 @@ export default function Home() {
                   serviceCardRefs.current[index] = el;
                 }
               }}
-              className="service-item flex flex-row items-start p-8 bg-[#FFFFFFC0] rounded-2xl shadow-lg transition-all duration-300 group hover-target w-full"
+              className="service-item flex flex-row items-start px-4 lg:p-8 bg-[#FFFFFFC0] rounded-2xl shadow-lg transition-all duration-300 group hover-target w-full"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
               <div className="mr-6 mt-1 flex-shrink-0 w-16 h-16 flex items-center justify-center text-gray-800">
                 {service.icon}
               </div>
-              <div className="flex-1">
+              <div className="flex-1 pr-4">
                 <h3 className="font-bold mb-3 text-gray-800" style={{ fontSize: '30px' }}>{service.title}</h3>
                 <p className="text-gray-600 leading-relaxed" style={{ fontSize: '24px' }}>{service.description}</p>
               </div>

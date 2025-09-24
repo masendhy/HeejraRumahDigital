@@ -94,11 +94,11 @@ export default function WebsiteDetail() {
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Website Tidak Ditemukan</h1>
           <p className="text-gray-600 mb-6">Maaf, website yang Anda cari tidak tersedia.</p>
           <Link 
-            href="/#demo" 
+            href="http://localhost:3000/" 
             className="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-700 hover:to-pink-600 transition-all duration-300"
             style={{ fontSize: '20px' }}
           >
-            Kembali ke Demo
+            Kembali ke Beranda
           </Link>
         </div>
       </div>
@@ -282,14 +282,14 @@ export default function WebsiteDetail() {
       
       <div className="max-w-7xl mx-auto">
         <Link 
-          href="/#demo" 
+          href="http://localhost:3000/" 
           className="inline-flex items-center text-purple-600 hover:text-purple-800 mb-8 transition-colors duration-300 font-bold"
           style={{ fontSize: '20px' }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" viewBox="0 0 20 20" fill="#9333ea">
             <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
           </svg>
-          Kembali ke Demo
+          Kembali ke Beranda
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
