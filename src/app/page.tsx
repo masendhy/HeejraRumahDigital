@@ -463,7 +463,7 @@ export default function Home() {
                   serviceCardRefs.current[index] = el;
                 }
               }}
-              className="service-item flex flex-row items-start px-4 lg:p-8 bg-[#FFFFFFC0] rounded-2xl shadow-lg transition-all duration-300 group hover-target w-full"
+              className="service-item flex flex-row items-start px-6 mb-6 lg:px-8 lg:mb-0 lg:p-8 bg-[#FFFFFFC0] rounded-2xl shadow-lg transition-all duration-300 group hover-target w-full"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
