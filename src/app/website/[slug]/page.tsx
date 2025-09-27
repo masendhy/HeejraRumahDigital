@@ -352,7 +352,12 @@ export default function WebsiteDetail() {
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Fitur Utama</h2>
+            <h2 
+              className="text-3xl font-bold mb-6"
+              style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}
+            >
+              Fitur Utama
+            </h2>
             <ul className="space-y-4">
               {website.features.map((feature: string, index: number) => (
                 <li key={index} className="flex items-start">
@@ -360,8 +365,10 @@ export default function WebsiteDetail() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span 
-                    className="text-gray-700"
-                    style={{ fontSize: '20px' }}
+                    style={{ 
+                      color: theme === 'dark' ? '#ffffff' : '#6b7280',
+                      fontSize: '20px' 
+                    }}
                   >
                     {feature}
                   </span>
@@ -371,12 +378,17 @@ export default function WebsiteDetail() {
           </div>
           
           <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Teknologi</h2>
+            <h2 
+              className="text-3xl font-bold mb-6"
+              style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}
+            >
+              Teknologi
+            </h2>
             <div className="flex flex-wrap gap-3 mb-8">
               {website.technologies.map((tech: string, index: number) => (
                 <span 
                   key={index} 
-                  className="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full text-sm font-medium"
+                  className="px-4 py-2 bg-[#568c6a] text-white rounded-full text-sm font-medium"
                   style={{ fontSize: '18px' }}
                 >
                   {tech}
