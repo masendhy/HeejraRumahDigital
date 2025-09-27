@@ -31,8 +31,23 @@ const useTheme = () => {
   return theme;
 };
 
+// Tipe data untuk website
+type Website = {
+  id: number;
+  slug: string;
+  title: string;
+  category: string;
+  image: string;
+  description: string;
+  features: string[];
+  technologies: string[];
+  client: string;
+  industry: string;
+  year: string;
+};
+
 // Data contoh untuk website detail
-const websiteData = [
+const websiteData: Website[] = [
   {
     id: 1,
     slug: 'demo-website-showroom',
@@ -78,7 +93,7 @@ const websiteData = [
 export default function WebsiteDetail() {
   const params = useParams();
   const { slug } = params;
-  const [website, setWebsite] = useState<any>(null);
+  const [website, setWebsite] = useState<Website | null>(null);
   const [loading, setLoading] = useState(true);
   const theme = useTheme(); // Use the custom theme hook
 

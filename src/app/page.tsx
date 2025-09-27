@@ -853,6 +853,15 @@ export default function Home() {
           </div>
           
           <div className="border-t mt-8 pt-8 text-center">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-4">
+              <a 
+                href="/admin/login" 
+                className="text-sm text-gray-600 hover:text-purple-600 transition-colors"
+                style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}
+              >
+                Admin Login
+              </a>
+            </div>
             <p style={{ color: theme === 'dark' ? '#ffffff' : '#101829' }}>© 2025 PT. Heejra Rumah Digital. Hak cipta dilindungi.</p>
           </div>
         </div>
